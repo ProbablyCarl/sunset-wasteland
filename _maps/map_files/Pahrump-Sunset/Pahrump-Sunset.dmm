@@ -10167,8 +10167,8 @@
 /area/f13/bar/heaven)
 "aKD" = (
 /obj/structure/ladder/unbreakable{
-	name = "Secret Hatch";
-	id = "Bos Bunker"
+	id = "Bos Bunker";
+	name = "Secret Hatch"
 	},
 /turf/open/floor/f13{
 	color = "#818181";
@@ -21463,8 +21463,8 @@
 "bRl" = (
 /obj/structure/table,
 /obj/machinery/chem_dispenser/drinks/beer{
-	pixel_y = 30;
-	density = 0
+	density = 0;
+	pixel_y = 30
 	},
 /turf/open/floor/f13{
 	icon_state = "white"
@@ -23786,8 +23786,8 @@
 /area/f13/wasteland/east)
 "cwm" = (
 /obj/structure/closet/crate/bin{
-	pixel_y = 27;
-	density = 0
+	density = 0;
+	pixel_y = 27
 	},
 /turf/open/floor/f13{
 	icon_state = "white"
@@ -24103,8 +24103,8 @@
 /obj/structure/table,
 /obj/machinery/reagentgrinder,
 /obj/machinery/vending/wardrobe/chef_wardrobe{
-	pixel_y = 29;
-	density = 0
+	density = 0;
+	pixel_y = 29
 	},
 /turf/open/floor/f13{
 	icon_state = "white"
@@ -38814,8 +38814,8 @@
 "mBw" = (
 /obj/structure/table,
 /obj/machinery/chem_dispenser/drinks{
-	pixel_y = 30;
-	density = 0
+	density = 0;
+	pixel_y = 30
 	},
 /turf/open/floor/f13{
 	icon_state = "white"
@@ -41603,8 +41603,8 @@
 /area/f13/wasteland/museum)
 "ovr" = (
 /obj/machinery/vending/dinnerware{
-	pixel_y = -7;
-	density = 0
+	density = 0;
+	pixel_y = -7
 	},
 /turf/closed/wall/f13/store,
 /area/f13/brotherhood)
@@ -56051,8 +56051,8 @@
 /area/f13/wasteland/bighorn)
 "xVT" = (
 /obj/machinery/button/door{
-	pixel_y = 10;
-	id = "BoS Inside"
+	id = "BoS Inside";
+	pixel_y = 10
 	},
 /turf/closed/wall/r_wall,
 /area/f13/brotherhood)

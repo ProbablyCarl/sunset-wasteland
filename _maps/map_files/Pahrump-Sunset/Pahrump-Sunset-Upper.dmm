@@ -1048,9 +1048,9 @@
 /area/f13/building/mall)
 "ayb" = (
 /obj/machinery/chem_dispenser/drinks{
+	density = 0;
 	dir = 1;
-	pixel_y = -15;
-	density = 0
+	pixel_y = -15
 	},
 /turf/open/floor/carpet/black,
 /area/f13/brotherhood)
@@ -1501,6 +1501,14 @@
 /obj/effect/spawner/lootdrop/f13/junkspawners,
 /turf/open/floor/plasteel/f13/vault_floor/dark,
 /area/f13/building/mall)
+"buL" = (
+/obj/machinery/light{
+	dir = 4;
+	light_color = "#c1caff"
+	},
+/obj/structure/window/spawner/north,
+/turf/open/floor/f13/wood,
+/area/f13/brotherhood)
 "bvd" = (
 /obj/effect/decal/cleanable/dirt{
 	color = "#363636"
@@ -1633,8 +1641,8 @@
 	pixel_y = 11
 	},
 /obj/item/reagent_containers/food/drinks/drinkingglass{
-	pixel_y = 6;
-	pixel_x = -7
+	pixel_x = -7;
+	pixel_y = 6
 	},
 /turf/open/floor/carpet/black,
 /area/f13/brotherhood)
@@ -1895,12 +1903,12 @@
 "csE" = (
 /obj/structure/table/glass,
 /obj/item/storage/box/pillbottles{
-	pixel_y = 14;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = 14
 	},
 /obj/item/storage/box/gloves{
-	pixel_y = 4;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = 4
 	},
 /turf/open/floor/plasteel/freezer,
 /area/f13/brotherhood)
@@ -2141,8 +2149,8 @@
 "dcv" = (
 /obj/structure/table/glass,
 /obj/item/storage/box/syringes{
-	pixel_y = 14;
-	pixel_x = 7
+	pixel_x = 7;
+	pixel_y = 14
 	},
 /obj/item/storage/box/beakers{
 	pixel_x = -6;
@@ -4265,6 +4273,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plasteel/f13/vault_floor/plating,
 /area/f13/building/mall)
+"iEv" = (
+/obj/structure/railing/wood{
+	dir = 4
+	},
+/turf/open/floor/f13/wood,
+/area/f13/brotherhood)
 "iEU" = (
 /obj/structure/sign/poster/prewar/poster70{
 	pixel_x = -32
@@ -5107,8 +5121,8 @@
 /obj/structure/table/reinforced,
 /obj/machinery/computer/terminal{
 	dir = 8;
-	termtag = "Private";
-	pixel_y = 5
+	pixel_y = 5;
+	termtag = "Private"
 	},
 /turf/open/floor/f13/wood,
 /area/f13/brotherhood)
@@ -5434,9 +5448,9 @@
 /area/f13/followers)
 "lzz" = (
 /obj/machinery/chem_dispenser/drinks/beer{
+	density = 0;
 	dir = 1;
-	pixel_y = -15;
-	density = 0
+	pixel_y = -15
 	},
 /turf/open/floor/carpet/black,
 /area/f13/brotherhood)
@@ -6646,6 +6660,13 @@
 "oez" = (
 /turf/open/transparent/openspace,
 /area/f13/wasteland)
+"oeN" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/window/spawner/north,
+/turf/open/floor/f13/wood,
+/area/f13/brotherhood)
 "ofT" = (
 /obj/structure/railing{
 	color = null;
@@ -7751,6 +7772,12 @@
 	icon_state = "darkrusty"
 	},
 /area/f13/building/massfusion)
+"qJI" = (
+/obj/structure/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/f13/wood,
+/area/f13/brotherhood)
 "qJQ" = (
 /obj/structure/flora/ausbushes/grassybush{
 	icon_state = "genericbush_4"
@@ -8331,7 +8358,6 @@
 "slA" = (
 /obj/machinery/hydroponics/constructable,
 /obj/machinery/door/window/right{
-	dir = 2;
 	req_one_access_txt = "120"
 	},
 /turf/open/floor/f13{
@@ -9518,8 +9544,8 @@
 /obj/structure/table/reinforced,
 /obj/machinery/computer/terminal{
 	dir = 4;
-	termtag = "Business";
-	pixel_y = 5
+	pixel_y = 5;
+	termtag = "Business"
 	},
 /turf/open/floor/f13/wood,
 /area/f13/brotherhood)
@@ -66870,9 +66896,9 @@ abv
 abv
 abv
 jNF
-hqd
-xtN
 cED
+hqd
+oeN
 cED
 cED
 qnN
@@ -67128,7 +67154,7 @@ abv
 abv
 jNF
 cED
-cED
+qJI
 cED
 cED
 cED
@@ -70212,7 +70238,7 @@ abv
 abv
 jNF
 cED
-cED
+iEv
 cED
 cED
 cED
@@ -70468,9 +70494,9 @@ abv
 abv
 abv
 jNF
-hqd
-aiR
 cED
+hqd
+buL
 cED
 cED
 fXG
