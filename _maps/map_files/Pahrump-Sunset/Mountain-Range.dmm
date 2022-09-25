@@ -1733,6 +1733,9 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/f13,
 /area/f13/enclave)
+"wc" = (
+/turf/closed/indestructible/riveted,
+/area/f13/tcoms)
 "wf" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/shutters{
@@ -3132,6 +3135,10 @@
 /obj/structure/debris/v3,
 /turf/open/indestructible/ground/outside/snow_plating,
 /area/f13/wasteland)
+"OY" = (
+/obj/machinery/telecomms/relay/preset/telecomms,
+/turf/open/indestructible,
+/area/f13/tcoms)
 "OZ" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
@@ -3220,6 +3227,9 @@
 /obj/item/clothing/under/burial,
 /turf/open/floor/plasteel/f13/vault_floor/neutral,
 /area/f13/enclave)
+"QN" = (
+/turf/open/indestructible,
+/area/f13/tcoms)
 "QP" = (
 /obj/structure/debris/v2,
 /turf/open/indestructible/ground/outside/snow_plating,
@@ -19162,11 +19172,11 @@ HA
 HA
 HA
 HA
-HA
-HA
-HA
-HA
-HA
+iT
+iT
+iT
+iT
+iT
 iT
 "}
 (121,1,1) = {"
@@ -19289,12 +19299,12 @@ HA
 HA
 HA
 HA
-HA
-HA
-HA
-HA
-HA
 iT
+wc
+wc
+wc
+wc
+wc
 "}
 (122,1,1) = {"
 pl
@@ -19416,12 +19426,12 @@ HA
 HA
 HA
 HA
-HA
-HA
-HA
-HA
-HA
 iT
+wc
+QN
+QN
+QN
+wc
 "}
 (123,1,1) = {"
 pl
@@ -19543,12 +19553,12 @@ HA
 HA
 HA
 HA
-HA
-HA
-HA
-HA
-HA
 iT
+wc
+QN
+OY
+QN
+wc
 "}
 (124,1,1) = {"
 pl
@@ -19670,12 +19680,12 @@ HA
 HA
 HA
 HA
-HA
-HA
-HA
-HA
-HA
 iT
+wc
+QN
+QN
+QN
+wc
 "}
 (125,1,1) = {"
 pl
@@ -19798,9 +19808,9 @@ iT
 iT
 iT
 iT
-iT
-iT
-iT
-iT
-iT
+wc
+wc
+wc
+wc
+wc
 "}
