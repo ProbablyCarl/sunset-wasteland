@@ -306,9 +306,6 @@
 /area/f13/wasteland)
 "eE" = (
 /obj/effect/turf_decal/stripes/line,
-/obj/machinery/door/poddoor/shutters{
-	name = "security shutters"
-	},
 /turf/open/floor/plasteel/f13/vault_floor/dark,
 /area/f13/enclave)
 "eL" = (
@@ -1907,11 +1904,9 @@
 /turf/open/floor/plasteel/f13/vault_floor/dark/darksolid,
 /area/f13/enclave)
 "yu" = (
-/obj/machinery/door/airlock/hatch{
-	locked = 1;
-	req_access_txt = "134"
-	},
-/turf/open/floor/plasteel/f13/vault_floor/dark/darksolid,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/bed/mattress/pregame,
+/turf/open/floor/plasteel/f13/vault_floor/dark,
 /area/f13/enclave)
 "yv" = (
 /obj/machinery/light/small,
@@ -2309,10 +2304,6 @@
 /obj/machinery/disposal/bin,
 /turf/open/floor/plasteel/f13/vault_floor/dark,
 /area/f13/enclave)
-"Ec" = (
-/obj/structure/obstacle/jammed_door,
-/turf/open/floor/plasteel/f13/vault_floor/dark/darksolid,
-/area/f13/enclave)
 "Ed" = (
 /obj/machinery/light{
 	dir = 4;
@@ -2532,9 +2523,10 @@
 /area/f13/wasteland)
 "GN" = (
 /obj/machinery/door/airlock/hatch{
-	locked = 1;
+	req_access = null;
 	req_access_txt = "134"
 	},
+/obj/structure/barricade/wooden/planks/pregame,
 /turf/open/floor/plasteel/f13/vault_floor/floor/floorsolid,
 /area/f13/enclave)
 "GY" = (
@@ -3508,12 +3500,6 @@
 /obj/item/storage/backpack/chameleon,
 /obj/item/storage/backpack/chameleon,
 /turf/open/floor/plasteel/f13/vault_floor/red/whiteredfull,
-/area/f13/enclave)
-"TP" = (
-/obj/machinery/door/airlock/vault{
-	locked = 1
-	},
-/turf/open/floor/plasteel/f13/vault_floor/dark/darksolid,
 /area/f13/enclave)
 "TX" = (
 /obj/structure/table/glass,
@@ -8704,7 +8690,7 @@ iT
 AW
 AW
 AW
-Ec
+gp
 AW
 AW
 AW
@@ -8961,7 +8947,7 @@ TI
 TI
 TI
 TI
-yu
+gp
 Ih
 nP
 tH
@@ -9340,7 +9326,7 @@ TI
 TI
 gs
 mJ
-TI
+yu
 TI
 AW
 iy
@@ -9591,12 +9577,12 @@ iT
 iT
 iT
 AW
-TI
+yu
 be
 vs
 TI
 TI
-yu
+gp
 Ih
 tH
 nP
@@ -9847,7 +9833,7 @@ iT
 AW
 AW
 AW
-TP
+gp
 AW
 AW
 AW
