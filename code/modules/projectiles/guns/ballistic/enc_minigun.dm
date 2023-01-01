@@ -24,6 +24,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/encencminigunbal4mm/Destroy()
+	QDEL_NULL(gun)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
@@ -132,6 +133,10 @@
 
 	return ..()
 
+/obj/item/gun/ballistic/encminigunbal4mm/Destroy()
+	ammo_pack = null
+	return ..()
+
 /obj/item/gun/ballistic/encminigunbal4mm/attack_self(mob/living/user)
 	return
 
@@ -179,7 +184,7 @@
 
 //The ammo/gun is stored in a back slot item
 /obj/item/encminigunpack
-	name = "backpack power source"
+	name = "\improper H&K L30 backpack power source"
 	desc = "The massive external power source for the laser gatling gun."
 	icon = 'icons/obj/guns/minigun.dmi'
 	icon_state = "holstered"
@@ -201,6 +206,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/encminigunpack/Destroy()
+	QDEL_NULL(gun)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
@@ -306,6 +312,10 @@
 
 	return ..()
 
+/obj/item/gun/energy/encminigun/Destroy()
+	ammo_pack = null
+	return ..()
+
 /obj/item/gun/energy/encminigun/attack_self(mob/living/user)
 	return
 
@@ -342,7 +352,3 @@
 	if(!ammo_pack || ammo_pack.loc != user)
 		to_chat(user, "You need the backpack power source to fire the gun!")
 	. = ..()
-
-/obj/item/gun/energy/encminigun/dropped(mob/living/user)
-	. = ..()
-	ammo_pack.attach_gun(user)

@@ -118,6 +118,7 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/tube357
 	extra_speed = 300
 	fire_sound = 'sound/f13weapons/cowboyrepeaterfire.ogg'
+	extra_damage = 4
 
 
 //Trail carbine							Keywords: .44, Lever action, 12 round internal, Long barrel
@@ -129,6 +130,7 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/tube44
 	extra_speed = 200
 	fire_sound = 'sound/f13weapons/44mag.ogg'
+	extra_damage = 4
 
 
 //Brush gun								Keywords: .45-70, Lever action, 10 round internal, Long barrel
@@ -142,6 +144,7 @@
 	fire_delay = 3
 	recoil = 0.15
 	fire_sound = 'sound/f13weapons/brushgunfire.ogg'
+	extra_penetration = 0.12
 
 //Medicine Stick						Keywords: .45-70, Lever action, 8 round internal, Long barrel, Unique
 /obj/item/gun/ballistic/rifle/repeater/brush/medistick
@@ -153,6 +156,7 @@
 	fire_delay = 2.25
 	recoil = 0.10
 	fire_sound = 'sound/f13weapons/brushgunfire.ogg'
+	extra_penetration = 0.4
 
 
 ////////////////////////
@@ -208,7 +212,7 @@
 		..()
 
 
-//Paciencia								Keywords: UNIQUE, .308, Bolt-action, 5 rounds internal, Scoped
+//Paciencia								Keywords: UNIQUE, .308, Bolt-action, 3 rounds internal, Scoped
 /obj/item/gun/ballistic/rifle/hunting/paciencia
 	name = "Paciencia"
 	desc = "A modified .308 hunting rifle with a reduced magazine but an augmented receiver. A Mexican flag is wrapped around the stock. You only have three shots- make them count."
@@ -220,6 +224,9 @@
 	zoom_amt = 10
 	zoom_out_amt = 13
 	can_scope = FALSE
+	extra_speed = 1000
+	extra_penetration = 0.7
+	extra_damage = 10.4
 
 /obj/item/gun/ballistic/rifle/hunting/paciencia/attackby(obj/item/A, mob/user, params) //no sawing off this one
 	if(istype(A, /obj/item/circular_saw) || istype(A, /obj/item/gun/energy/plasmacutter))
@@ -232,7 +239,7 @@
 		..()
 
 
-//Mosin-Nagant							Keywords: 7.62, Bolt-action, 5 rounds internal
+//Mosin-Nagant							Keywords: 7.62, Bolt-action, 5 rounds internal. Better pen than the Enfield, lower damage.
 /obj/item/gun/ballistic/rifle/mosin
 	name = "Mosin-Nagant m38"
 	desc = "A rusty old Russian bolt action chambered in 7.62."
@@ -242,6 +249,8 @@
 	extra_speed = 600
 	fire_delay = 3
 	force = 18
+	extra_penetration = 0.8
+	extra_damage = 6
 	can_scope = TRUE
 	scope_state = "scope_mosin"
 	scope_x_offset = 3
@@ -253,17 +262,19 @@
 	pump_sound = 'sound/weapons/boltpump.ogg'
 	fire_sound = 'sound/f13weapons/boltfire.ogg'
 
-//Lee-Enfield,SMLE 						Keywords: 7.62, Bolt-action, 5 rounds internal, very fast firing rate, high stamina cost on working bolt
+//Lee-Enfield,SMLE 						Keywords: 7.62, Bolt-action, 10 rounds internal, very fast firing rate, high stamina cost on working bolt
 /obj/item/gun/ballistic/rifle/enfield
 	name = "Lee-Enfield rifle"
 	desc = "A british rifle sometimes known as the SMLE. It seems to have been re-chambered in .308."
 	icon_state = "enfield2"
 	item_state = "308"
-	mag_type = /obj/item/ammo_box/magazine/internal/boltaction
+	mag_type = /obj/item/ammo_box/magazine/internal/boltaction_enfield
 	extra_speed = 600
 	fire_delay = 1
 	slowdown = 0.35
 	force = 16
+	extra_penetration = 0.6
+	extra_damage = 12
 	can_scope = TRUE
 	scope_state = "scope_mosin"
 	scope_x_offset = 3
@@ -327,8 +338,9 @@
 	icon_state = "amr"
 	item_state = "amr"
 	mag_type = /obj/item/ammo_box/magazine/amr
-	fire_delay = 12 //Heavy round, tiny bit slower
-	recoil = 1
+	fire_delay = 22
+	recoil = 10
+	slowdown = 1.45 //.20 higher than the M1919 MMG.
 	spread = 0
 	force = 10 //Big clumsy and sensitive scope, makes for a poor club
 	zoomable = TRUE

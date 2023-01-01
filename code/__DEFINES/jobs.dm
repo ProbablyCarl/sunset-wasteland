@@ -10,6 +10,7 @@
 #define FACTION_RAIDERS "Raiders"
 #define FACTION_FOLLOWERS "Followers"
 #define FACTION_KHAN "Great Khans"
+#define FACTION_TRIBAL "Tribals"
 
 #define ENGSEC			(1<<0)
 
@@ -113,6 +114,7 @@
 #define F13SCRIBE		(1<<9)
 #define F13INITIATE		(1<<10)
 #define F13OFFDUTYBOS	(1<<11)
+#define F13INQUIS		(1<<12)
 
 #define DEP_BIGHORN (1<<6)
 
@@ -125,6 +127,7 @@
 #define F13BANKER		(1<<6)
 #define F13DEPUTY		(1<<7)
 #define F13SECRETARY	(1<<8)
+#define F13MERC			(1<<9)
 
 #define VAULT			(1<<7)
 
@@ -136,12 +139,20 @@
 #define WASTELAND		(1<<8)
 
 #define F13WASTELANDER	(1<<0)
-#define F13RAIDER		(1<<1)
-#define F13TRIBAL		(1<<2)
 #define F13VIGILANTE	(1<<3)
 #define F13ADMINBOOS	(1<<4)
 
-#define ENCLAVE			(1<<10)
+#define RAIDER			(1<<9)
+#define F13RAIDER		(1<<0)
+#define F13RAIDER_OUTSIDER	(1<<1)
+#define F13RAIDER_BOSS		(1<<1)
+
+#define TRIBAL			(1<<10)
+#define F13TRIBAL		(1<<0)
+#define F13TRIBAL_GATHERER	(1<<1)
+#define F13TRIBAL_SHAMAN	(1<<2)
+
+#define ENCLAVE			(1<<11)
 
 #define F13USLT			(1<<0)
 #define F13USGYSGT		(1<<1)
@@ -149,16 +160,17 @@
 #define F13USSCIENTIST	(1<<3)
 #define F13USSPECIALIST	(1<<4)
 #define F13USPRIVATE	(1<<5)
-#define F13USBDUTY      (1<<6)
+#define F13USBDUTY		(1<<6)
+#define F13USIS			(1<<7)
 
-#define FOLLOWERS		(1<<11)
+#define FOLLOWERS		(1<<12)
 
 #define	F13LEADPRACTITIONER	(1<<0)
 #define	F13PRACTITIONER	(1<<1)
 #define F13FOLLOWERGUARD	(1<<2)
 #define F13FOLLOWERVOLUNTEER	(1<<3)
 
-#define KHAN		(1<<12)
+#define KHAN		(1<<13)
 /*
 #define F13NOYAN (1<<0)
 #define F13STEWARD (1<<1)
@@ -169,6 +181,9 @@
 */
 #define F13KHAN (1<<0)
 #define F13KHANCHEMIST (1<<1)
+#define F13KHANSEN (1<<2)
+#define F13KHANSMITH (1<<3)
+#define F13KHANCOURT (1<<4)
 
 #define JOB_AVAILABLE 0
 #define JOB_UNAVAILABLE_GENERIC 1

@@ -121,6 +121,11 @@
 	suit_type = /obj/item/clothing/suit/armor/f13/power_armor/x02
 	helmet_type = /obj/item/clothing/head/helmet/f13/power_armor/x02helmet
 
+/obj/machinery/suit_storage_unit/enclave_is
+	name = "internal security suit storage unit"
+	suit_type = /obj/item/clothing/suit/armor/f13/power_armor/tesla
+	helmet_type = /obj/item/clothing/head/helmet/f13/power_armor/tesla
+
 /obj/machinery/suit_storage_unit/open
 	state_open = TRUE
 	density = FALSE
@@ -139,6 +144,7 @@
 	update_icon()
 
 /obj/machinery/suit_storage_unit/Destroy()
+	QDEL_NULL(wires)
 	QDEL_NULL(suit)
 	QDEL_NULL(helmet)
 	QDEL_NULL(mask)

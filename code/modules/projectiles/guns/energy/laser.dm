@@ -429,6 +429,23 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/lasgun/hitscan/focused)
 	fire_delay = 5
 
+/obj/item/gun/energy/laser/aer9/recharger
+	name = "gen-3 recharger rifle"
+	desc = "A strange fusion of pre-war tech and recent innovation. Uses a MF-Breeder cell to charge it's capacitor banks, but isn't the most powerful."
+	icon = 'icons/fallout/objects/guns/energy.dmi'
+	icon_state = "rechargerrifle"
+	item_state = "laser-rifle9"
+	ammo_type = list(/obj/item/ammo_casing/energy/laser/lasgun/hitscan/recharger)
+	cell_type = /obj/item/stock_parts/cell/ammo/breeder
+	fire_delay = 1
+	can_scope = 1
+	can_remove = 0
+	can_charge = 0
+	selfcharge = 1
+	scope_x_offset = 12
+	scope_y_offset = 22
+	equipsound = 'sound/f13weapons/equipsounds/aer9equip.ogg'
+
 //Ultracite Laser rifle
 /obj/item/gun/energy/laser/ultra_rifle
 	name = "\improper Ultracite laser rifle"
@@ -470,7 +487,6 @@
 	scope_y_offset = 20
 	equipsound = 'sound/f13weapons/equipsounds/tribeamequip.ogg'
 
-
 //AER14 Laser rifle
 /obj/item/gun/energy/laser/aer14
 	name = "\improper AER14 laser rifle"
@@ -485,6 +501,13 @@
 	scope_y_offset = 20
 	equipsound = 'sound/f13weapons/equipsounds/aer14equip.ogg'
 
+//Fluff AER14
+/obj/item/gun/energy/laser/aer14/refurb
+	name = "\improper Refurbished AER14 laser rifle"
+	desc = "A bleeding-edge, pre-war laser rifle. Or, at least, it was at one point. \
+	This one appears to have a cracked and dirty focusing lense, requiring reconfiguration in a workshop. \
+	Additionally, it appears as if it's using a makeshift array, significantly reducing the power of each bolt, but increasing the number of available discharges."
+	ammo_type = list(/obj/item/ammo_casing/energy/laser/lasgun/hitscan)
 
 //LAER Energy rifle
 /obj/item/gun/energy/laser/laer
@@ -583,6 +606,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/minigunpack/Destroy()
+	gun = null // should maybe qdel_null
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 

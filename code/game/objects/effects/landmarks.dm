@@ -711,6 +711,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	name = "BoS Off-Duty"
 	icon_state = "Off-Duty"
 
+/obj/effect/landmark/start/f13/inquis
+	name = "Inquisitorial Acolyte"
+	icon_state = "Elder"
+
 // Vault
 
 /obj/effect/landmark/start/f13/overseer
@@ -784,6 +788,14 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	name = "Barkeep"
 	icon_state = "Barkeep"
 
+/obj/effect/landmark/start/f13/shoprep
+	name = "Sierra Representative"
+	icon_state = "Banker"
+
+/obj/effect/landmark/start/f13/shopmerc
+	name = "Mercenary"
+	icon_state = "Officer"
+
 // Wasteland
 
 /obj/effect/landmark/start/f13/cultleader
@@ -798,8 +810,16 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	icon_state = "Wastelander"
 
 /obj/effect/landmark/start/f13/raider
-	name = "Outlaw"
+	name = "Raider"
 	icon_state = "Raider"
+
+/obj/effect/landmark/start/f13/outsider
+	name = "Outsider"
+	icon_state = "Detective"
+
+/obj/effect/landmark/start/f13/raider_boss
+	name = "Raider Captain"
+	icon_state = "Enforcer"
 
 /obj/effect/landmark/start/f13/enforcer
 	name = "Den Mob Enforcer"
@@ -836,11 +856,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 /obj/effect/landmark/start/f13/ussgt
 	name = "Enclave Sergeant"
 	icon_state = "ussgt"
-/*
-/obj/effect/landmark/start/f13/usai
-	name = "Enclave Armored Infantry"
+
+/obj/effect/landmark/start/f13/usis
+	name = "Enclave Internal Security"
 	icon_state = "ussgt"
-*/
+
 /obj/effect/landmark/start/f13/usspecialist
 	name = "Enclave Specialist"
 	icon_state = "usoffduty"
@@ -852,11 +872,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 /obj/effect/landmark/start/f13/usgysgt
 	name = "Enclave Platoon Sergeant"
 	icon_state = "usgunnery"
-/*
+
 /obj/effect/landmark/start/f13/uslightduty
 	name = "Enclave Bunker Duty"
 	icon_state = "usoffduty"
-*/
+
 /obj/effect/landmark/start/f13/enclave_synthetic
 	name = "Synthetic"
 	icon_state = "Cyborg"
@@ -867,37 +887,16 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 
 //Tribal
 
-/obj/effect/landmark/start/f13/tribal
-	name = "Tribal"
+/obj/effect/landmark/start/f13/tribal_hunter
+	name = "Tribal Hunter"
 	icon_state = "Tribal"
 
-/obj/effect/landmark/start/f13/chief
-	name = "Chief"
+/obj/effect/landmark/start/f13/tribal_gatherer
+	name = "Tribal Gatherer"
 	icon_state = "Tribal"
 
-/obj/effect/landmark/start/f13/shaman
-	name = "Shaman"
-	icon_state = "Tribal"
-
-/obj/effect/landmark/start/f13/villager
-	name = "Villager"
-	icon_state = "Tribal"
-
-/obj/effect/landmark/start/f13/hunter
-	name = "Hunter"
-	icon_state = "Tribal"
-
-/obj/effect/landmark/start/f13/Hhunter
-	name = "Head Hunter"
-	icon_state = "Tribal"
-
-/obj/effect/landmark/start/f13/druid
-	icon_state = "Tribal"
-
-/obj/effect/landmark/start/f13/spiritpledged
-	icon_state = "Tribal"
-
-/obj/effect/landmark/start/f13/guardian
+/obj/effect/landmark/start/f13/tribal_shaman
+	name = "Tribal Shaman"
 	icon_state = "Tribal"
 
 //Followers of the Apocalypse
@@ -909,8 +908,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	name = "Followers Doctor"
 	icon_state = "Medical Doctor"
 
-/obj/effect/landmark/start/f13/followersguard
-	name = "Followers Guard"
+/obj/effect/landmark/start/f13/followerscholar
+	name = "Followers Scholar"
 	icon_state = "Security Officer"
 
 /obj/effect/landmark/start/f13/followersvolunteer
@@ -958,8 +957,20 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 // Proper Khans
 /obj/effect/landmark/start/f13/khan
 	name = "Khan Enforcer"
-	icon_state = "Pusher"
+	icon_state = "Raider"
 
 /obj/effect/landmark/start/f13/khan_chemist
 	name = "Khan Chemist"
 	icon_state = "Pusher"
+
+/obj/effect/landmark/start/f13/khan_senior
+	name = "Khan Senior Enforcer"
+	icon_state = "Boss"
+
+/obj/effect/landmark/start/f13/khan_smith
+	name = "Khan Smith"
+	icon_state = "Pusher"
+
+/obj/effect/landmark/start/f13/khan_court
+	name = "Khan Courtesan"
+	icon_state = "Tribal"

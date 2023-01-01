@@ -46,13 +46,22 @@
 	desc = "A combat leather jacket, outfitted with a special armored leather coat."
 	armor = list("melee" = 35, "bullet" = 22, "laser" = 22, "energy" = 15, "bomb" = 45, "bio" = 30, "rad" = 5, "fire" = 50, "acid" = 35, "wound" = 10)
 
+/obj/item/clothing/suit/armor/f13/leather_jacket/combat/sierra
+	name = "Sierra suit jacket"
+	icon = 'icons/fallout/clothing/suits_cosmetic.dmi'
+	mob_overlay_icon = 'icons/mob/clothing/suit.dmi'
+	icon_state = "sierrajacket"
+	item_state = "sierrajacket"
+	desc = "An armored suit jacket for the representative of the Sierra Trading Company. Lined with durable padding."
+	armor = list("melee" = 35, "bullet" = 45, "laser" = 30, "energy" = 15, "bomb" = 45, "bio" = 30, "rad" = 5, "fire" = 50, "acid" = 35, "wound" = 10)
+
 
 /obj/item/clothing/suit/armor/f13/kit
 	name = "armor kit"
 	desc = "Separate armor parts you can wear over the clothing to get the most basic protection from the dangers of wasteland.<br>It sure is better than going into the battle without any armor at all."
 	icon_state = "armorkit"
 	item_state = "armorkit"
-	armor = list("melee" = 30, "bullet" = 30, "laser" = 30, "energy" = 20, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 0, "wound" = 10)
+	armor = list("melee" = 12.5, "bullet" = 12.5, "laser" = 7.5, "energy" = 0, "bomb" = 15, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 0, "wound" = 10)
 	strip_delay = 30
 	slowdown = 0.025
 
@@ -60,12 +69,11 @@
 	. = ..()
 	AddComponent(/datum/component/armor_plate)
 
-/obj/item/clothing/suit/armor/f13/punk
+/obj/item/clothing/suit/armor/f13/kit/punk
 	name = "armor kit"
 	desc = "A couple of armor parts that can be worn over the clothing for moderate protection against the dangers of wasteland.<br>Do you feel lucky now? Well, do ya, punk?"
 	icon_state = "armorkit_punk"
 	item_state = "armorkit_punk"
-	armor = list("melee" = 20, "bullet" = 40, "laser" = 15, "energy" = 15, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 0, "wound" = 10)
 	strip_delay = 30
 	icon = 'icons/fallout/clothing/armored_light.dmi'
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/armor_light.dmi'
@@ -82,8 +90,8 @@
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/armor_light.dmi'
 	icon_state = "light_plates"
 	item_state = "armorkit"
-	armor = list("melee" = 33, "bullet" = 33, "laser" = 40, "energy" = 15, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "wound" = 10)
-	slowdown = 0.08
+	armor = list("melee" = 25, "bullet" = 25, "laser" = 40, "energy" = 15, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "wound" = 10)
+	slowdown = 0.04
 
 /obj/item/clothing/suit/armor/f13/leatherarmor
 	name = "leather armor"
@@ -578,6 +586,23 @@
 	armor = list("melee" = 72.5, "bullet" = 72.5, "laser" = 72.5, "energy" = 25, "bomb" = 65, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 50)
 	salvaged_type = /obj/item/clothing/suit/armored/heavy/salvaged_pa/t45d
 
+//Fluff Suit
+/obj/item/clothing/suit/armor/f13/power_armor/t45d/refurb
+	name = "Refurbished T-45d power armor"
+	desc = "An old, beat up suit of T-45d. This appears to have been refurbished time and again, with pockmarks all over the chasis."
+	armor = list("melee" = 45, "bullet" = 45, "laser" = 45, "energy" = 25, "bomb" = 50, "bio" = 60, "rad" = 10, "fire" = 60, "acid" = 20, "wound" = 50)
+	salvaged_type = null
+
+//////
+// Raider Boss
+//////
+/obj/item/clothing/suit/armor/f13/power_armor/t45d/raider
+	name = "Raider Captain's power armor"
+	desc = "The Raider Captain's set of refurbished T-45d power armor. How'd you get your hands on this?"
+	icon_state = "raiderpa"
+	item_state = "raiderpa"
+	salvaged_type = /obj/item/clothing/suit/armored/heavy/salvaged_pa/t45b/raider
+
 //////
 // Sheriff's Suit
 //////
@@ -639,13 +664,23 @@
 	salvaged_type = /obj/item/clothing/suit/armored/heavy/salvaged_pa/midwest
 
 /obj/item/clothing/suit/armor/f13/power_armor/midwest/hardened
-	name = "Hardened midwestern  T-51b power armor"
+	name = "Hardened midwestern T-51b power armor"
 	desc = "This set of power armor belongs to the Midwestern branch of the Brotherhood of Steel. This particular one has gone through a chemical hardening process, increasing its armor capabilities."
 	icon_state = "midwestpa"
 	item_state = "midwestpa"
 	slowdown = 0.25 //+0.05 from helmet = total 0.255
 	armor = list("melee" = 75, "bullet" = 75, "laser" = 75, "energy" = 32, "bomb" = 64, "bio" = 100, "rad" = 99, "fire" = 90, "acid" = 40, "wound" = 50)
 	salvaged_type = /obj/item/clothing/suit/armored/heavy/salvaged_pa/midwest/hardened
+
+//Inquisitor / Acolyte
+/obj/item/clothing/suit/armor/f13/power_armor/midwest_inquis
+	name = "Midwestern Inquisitorial APA"
+	desc = "This set of power armor belongs to the Midwestern branch of the Brotherhood of Steel. It appears to be painted in Inquisitorial colours."
+	icon_state = "apawbos"
+	item_state = "apawbos"
+	slowdown = 0.25 //+0.05 from helmet = total 0.255
+	armor = list("melee" = 75, "bullet" = 75, "laser" = 75, "energy" = 75, "bomb" = 62, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 40, "wound" = 50)
+	salvaged_type = null
 
 /obj/item/clothing/suit/armor/f13/power_armor/t51b/bos
 	name = "Brotherhood T-51b Power Armour"
@@ -684,19 +719,47 @@
 	item_state = "advpowerarmor1"
 	armor = list("melee" = 80, "bullet" = 80, "laser" = 85, "energy" = 35, "bomb" = 72, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 50)
 
-//Peacekeeper armor adjust as needed
+//Enclave armor adjust as needed
 /obj/item/clothing/suit/armor/f13/power_armor/x02
-	name = "Enclave power armor"
-	desc = "Upgraded pre-war power armor design used by the Enclave. It is mildly worn due to it's age and lack of maintenance after the fall of the Enclave."
-	icon_state = "advanced"
-	item_state = "advanced"
-	slowdown = 0.25 //+0.1 from helmet = total 0.35
-	armor = list("melee" = 85, "bullet" = 85, "laser" = 85, "energy" = 65, "bomb" = 70, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 50)
+	name = "APA Mk II"
+	desc = "Upgraded pre-war power armor design used by the Enclave."
+	icon_state = "x-01PA"
+	item_state = "x-01PA"
+	slowdown = 0.3//Worst slowdown of all combat sets.
+	armor = list("melee" = 80, "bullet" = 80, "laser" = 85, "energy" = 85, "bomb" = 70, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 50)
 	salvaged_type = /obj/item/clothing/suit/armored/heavy/salvaged_pa/x02 // Oh the misery
+
+/obj/item/clothing/suit/armor/f13/power_armor/tesla
+	name = "APA-T Mk II"
+	desc = "Upgraded pre-war power armor used by the Enclave, rigged with heavy electronics."
+	icon_state = "x-01tesla"
+	item_state = "x-01tesla"
+	slowdown = 0.3//Worst slowdown of all combat sets.
+	armor = list("melee" = 75, "bullet" = 75, "laser" = 95, "energy" = 95, "bomb" = 70, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 50)
+	var/hit_reflect_chance = 35
+
+/obj/item/clothing/suit/armor/f13/power_armor/tesla/run_block(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, final_block_chance, list/block_return)
+	if(is_energy_reflectable_projectile(object) && (attack_type == ATTACK_TYPE_PROJECTILE) && (def_zone in protected_zones))
+		if(prob(hit_reflect_chance))
+			block_return[BLOCK_RETURN_REDIRECT_METHOD] = REDIRECT_METHOD_DEFLECT
+			return BLOCK_SHOULD_REDIRECT | BLOCK_REDIRECTED | BLOCK_SUCCESS | BLOCK_PHYSICAL_INTERNAL
+	return ..()
+
+/obj/item/clothing/suit/armor/f13/power_armor/x02/eastcoast
+	name = "X-02 power armor"
+	desc = "A very rare suit of X-02 power armor."
+	icon_state = "PA_x02"
+	item_state = "PA_x02"
+
+/obj/item/clothing/suit/armor/f13/power_armor/tesla/eastcoast
+	name = "X-02 tesla armor"
+	desc = "A very rare suit of X-02 power armor. This one has been fitted with extra electronics and tesla attraction coils to be used with energy-based weapons."
+	icon_state = "PA_x02tesla"
+	item_state = "PA_x02tesla"
 
 /obj/item/clothing/suit/armor/f13/enclave/armorvest
 	name = "armored vest"
-	desc = "Efficient prewar design issued to Enclave personell."
+	desc = "Efficient prewar design issued to Enclave personnel."
 	icon_state = "armor_enclave_peacekeeper"
 	item_state = "armor_enclave_peacekeeper"
 	armor = list("melee" = 35, "bullet" = 50, "laser" = 30, "energy" = 30, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 0, "wound" = 10)
@@ -1305,3 +1368,9 @@
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|HANDS
 	slowdown = 0.05
+
+/obj/item/clothing/suit/armor/f13/rangercombat/finlayranger
+	name = "Brotherhood of Steel Ranger Armor"
+	desc = "A customized and well-worn suit of riot gear with parts of the suit reinforced with leather armor."
+	icon_state = "finlayranger"
+	item_state = "finlayranger"

@@ -16,27 +16,24 @@
 	src.comsig = comsig
 
 	var/mob/living/L = target
-	if(L.lying != 0)
-		L.transform = L.transform.Scale(SHORT, 1)
-	else
-		L.transform = L.transform.Scale(1, SHORT)
+	L.resize_y = SHORT
+	L.update_transform()
 	attached_targets[target] = comsig_target
 	RegisterSignal(target, comsig, .proc/check_loss) //Second arg of the signal will be checked against the comsig_target.
 
 /datum/element/dwarfism/proc/check_loss(mob/living/L, comsig_target)
+	SIGNAL_HANDLER
 	if(attached_targets[L] == comsig_target)
 		Detach(L)
 
 /datum/element/dwarfism/Detach(mob/living/L)
 	. = ..()
+	attached_targets -= L
+	UnregisterSignal(L, comsig)
 	if(QDELETED(L))
 		return
-	if(L.lying != 0)
-		L.transform = L.transform.Scale(TALL, 1)
-	else
-		L.transform = L.transform.Scale(1, TALL)
-	UnregisterSignal(L, comsig)
-	attached_targets -= L
+	L.resize_y = TALL
+	L.update_transform()
 
-#undef SHORT
 #undef TALL
+#undef SHORT

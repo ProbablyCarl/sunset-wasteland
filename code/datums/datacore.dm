@@ -104,6 +104,8 @@
 	var/list/tribe = list()
 	var/list/was = list()
 	var/list/misc = list()
+	var/list/tri = list()
+	var/list/out = list()
 	var/dat = {"
 	<head><style>
 		.manifest {border-collapse:collapse;}
@@ -154,6 +156,12 @@
 			department = 1
 		if(rank in GLOB.wasteland_positions)
 			was[name] = rank
+			department = 1
+		if(rank in GLOB.tribal_positions)
+			tri[name] = rank
+			department = 1
+		if(rank in GLOB.outlaw_positions)
+			out[name] = rank
 			department = 1
 		if(!department && !(name in command))
 			misc[name] = rank
@@ -481,6 +489,15 @@
 		if(username != to_check.fields["name"])
 			continue
 		return to_check
+
+/proc/find_general_record(field, value)
+	return find_record(field, value, GLOB.data_core.general)
+
+/proc/find_medical_record(field, value)
+	return find_record(field, value, GLOB.data_core.medical)
+
+/proc/find_security_record(field, value)
+	return find_record(field, value, GLOB.data_core.security)
 
 /datum/datacore/proc/remove_record_by_name(username)
 	for(var/datacore_list in list(general, medical, security, locked))

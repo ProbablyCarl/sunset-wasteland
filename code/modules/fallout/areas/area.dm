@@ -85,6 +85,7 @@
 /area/f13/wasteland/bighorn
 	name = "Bighorn Exterior"
 	icon_state = "bighornex"
+	requires_power = TRUE
 
 /area/f13/wasteland/khanfort
 	name = "Khan Fortress Exterior"
@@ -276,6 +277,7 @@
 /area/f13/city/bighorn
 	name = "Bighorn"
 	icon_state = "bighorn"
+	requires_power = TRUE
 
 /area/f13/citycaves
 	name = "City Caves"
@@ -408,6 +410,11 @@
 /area/f13/tunnel/khanfort
 	name = "Khan Fortress Tunnel"
 	icon_state = "tunnelkhan"
+
+/area/f13/tunnel/bighorn
+	name = "Bighorn Underground"
+	icon_state = "tunnel"
+	requires_power = TRUE
 
 /area/f13/trainstation
 	name = "Tunnel"
@@ -711,6 +718,7 @@
 	blob_allowed = 0
 	environment = 5
 	grow_chance = 5
+	requires_power = TRUE
 
 /area/f13/wasteland/khans
 	name = "Great Khan Encampment"
@@ -724,3 +732,12 @@
 	open_space = 1
 	environment = 15
 	grow_chance = 0
+
+//special
+/area/f13/vault_elevator
+	name = "elevator shaft"
+	icon_state = "error"
+
+/area/f13/enc_elevator
+	name = "elevator shaft"
+	icon_state = "error"

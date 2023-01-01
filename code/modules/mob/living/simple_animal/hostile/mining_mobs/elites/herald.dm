@@ -203,12 +203,13 @@
 	var/mob/living/simple_animal/hostile/asteroid/elite/herald/my_master = null
 
 /mob/living/simple_animal/hostile/asteroid/elite/herald/mirror/Initialize()
-	..()
+	. = ..()
 	toggle_ai(AI_OFF)
 
 /mob/living/simple_animal/hostile/asteroid/elite/herald/mirror/Destroy()
 	if(my_master != null)
 		my_master.my_mirror = null
+		my_master = null
 	. = ..()
 
 /obj/item/projectile/herald

@@ -266,7 +266,7 @@ ATTACHMENTS
 	build_zooming()
 
 /obj/item/gun/Destroy()
-	if(pin)
+	if(istype(pin)) // could be a typepath if qdel init hint was used before parent
 		QDEL_NULL(pin)
 	if(gun_light)
 		QDEL_NULL(gun_light)
@@ -488,7 +488,7 @@ ATTACHMENTS
 		return FALSE
 
 /obj/item/gun/CheckAttackCooldown(mob/user, atom/target)
-	if((user.a_intent == INTENT_HARM || INTENT_HELP) && user.Adjacent(target))		//melee
+	if((user.a_intent == INTENT_HARM || user.a_intent == INTENT_HELP) && user.Adjacent(target))		//melee
 		return user.CheckActionCooldown(CLICK_CD_MELEE)
 	return user.CheckActionCooldown(get_clickcd())
 
@@ -886,7 +886,7 @@ ATTACHMENTS
 
 	busy_action = TRUE
 
-	if(!bypass_timer && (!do_mob(user, target, 120) || user.zone_selected != BODY_ZONE_PRECISE_MOUTH))
+	if(!bypass_timer && (!do_mob(user, target, 20) || user.zone_selected != BODY_ZONE_PRECISE_MOUTH))
 		if(user)
 			if(user == target)
 				user.visible_message("<span class='notice'>[user] decided not to shoot.</span>")

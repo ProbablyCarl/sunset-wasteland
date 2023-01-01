@@ -140,7 +140,7 @@
 
 /obj/structure/trap/ward
 	name = "divine ward"
-	desc = "A divine barrier, It looks like you could destroy it with enough effort, or wait for it to dissipate..."
+	desc = "A divine barrier. It looks like you could destroy it with enough effort, or wait for it to dissipate..."
 	icon_state = "ward"
 	density = TRUE
 	time_between_triggers = 1200 //Exists for 2 minutes
@@ -179,6 +179,10 @@
 		COMSIG_ATOM_ENTERED = .proc/on_entered,
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
+
+/obj/structure/trap/stun/hunter/Destroy()
+	stored_item = null
+	return ..()
 
 /obj/structure/trap/stun/hunter/process_entered(atom/movable/AM)
 	..()
@@ -233,7 +237,7 @@
 	forceMove(stored_trap)//moves item into trap
 
 /obj/item/bountytrap/Destroy()
-	qdel(stored_trap)
+	QDEL_NULL(stored_trap)
 	QDEL_NULL(radio)
 	QDEL_NULL(spark_system)
 	. = ..()

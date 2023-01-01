@@ -87,7 +87,7 @@
 	AddElement(/datum/element/connect_loc, loc_connections)
 
 
-	INVOKE_ASYNC(src, /atom/movable.proc/float, TRUE)
+	float(TRUE)
 	QDEL_IN(src, 100)
 
 /obj/structure/leaper_bubble/Destroy()
@@ -120,8 +120,9 @@
 
 /datum/reagent/toxin/leaper_venom/on_mob_life(mob/living/carbon/M)
 	if(volume >= 10)
-		M.adjustToxLoss(5, 0)
+		M.adjustToxLoss(5, updating_health = FALSE)
 	..()
+	return TRUE // update health at end of tick
 
 /obj/effect/temp_visual/leaper_crush
 	name = "grim tidings"

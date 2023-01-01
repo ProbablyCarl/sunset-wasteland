@@ -26,29 +26,6 @@
 // SWORDS //
 ////////////		-block, 34-39 damage
 
-
-/obj/item/melee/onehanded/dragonfire
-	name = "Dragonfire Katana"
-	desc = "After the world ended, seppuku rates in Japan skyrocketed, the owner of this one however is crazy enough to keep going!"
-	icon_state = "DFkatana"
-	item_state = "DFkatana"
-	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	flags_1 = CONDUCT_1
-	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK
-	force = 30
-	throwforce = 10
-	w_class = WEIGHT_CLASS_BULKY
-	hitsound = 'sound/weapons/bladeslice.ogg'
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	sharpness = SHARP_EDGED
-	max_integrity = 200
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 50)
-	resistance_flags = FIRE_PROOF
-	total_mass = TOTAL_MASS_MEDIEVAL_WEAPON
-
-
-
 /obj/item/melee/onehanded/machete
 	name = "simple machete"
 	desc = "A makeshift machete made of a lawn mower blade."
@@ -67,6 +44,7 @@
 	force = 35
 	wound_bonus = 20
 	block_chance = 8
+	block_parry_data = /datum/block_parry_data/smith_generic //data is in finished items file
 
 /obj/item/melee/onehanded/machete/training
 	name = "training machete"
@@ -90,6 +68,7 @@
 	item_state = "gladius"
 	force = 36
 	wound_bonus = 30
+	block_parry_data = /datum/block_parry_data/smith_generic //data is in finished items file
 	block_chance = 10
 
 /obj/item/melee/onehanded/machete/spatha
@@ -117,6 +96,14 @@
 	force = 37
 	block_chance = 15
 
+/obj/item/melee/onehanded/machete/scrapsabre/khan
+	name = "honed scrap sabre"
+	desc = "Made from materials found in the wastes, a skilled blacksmith has turned it into a thing of deadly beauty. This appears to have the unique Khan emblem on the hilt."
+	icon_state = "scrapsabre"
+	item_state = "scrapsabre"
+	force = 35
+	block_chance = 25
+
 /obj/item/throwing_star/spear
 	name = "throwing spear"
 	desc = "An heavy hefty ancient weapon used to this day, due to its ease of lodging itself into its victim's body parts."
@@ -128,7 +115,7 @@
 	throwforce = 35
 	armour_penetration = 0.10
 	max_reach = 2
-	embedding = list("pain_mult" = 2, "embed_chance" = 60, "fall_chance" = 20)
+	embedding = list("pain_mult" = 2, "embed_chance" = 95, "fall_chance" = 5)
 	w_class = WEIGHT_CLASS_NORMAL
 
 
@@ -212,6 +199,7 @@
 	item_state = "knife_trench"
 	desc = "This blade is designed for brutal close quarters combat."
 	force = 31
+	block_parry_data = /datum/block_parry_data/smith_generic //data is in finished items file //Also gives trench knife an actual advantage
 	custom_materials = list(/datum/material/iron=8000)
 	attack_verb = list("slashed", "stabbed", "sliced", "shanked", "ripped", "lacerated")
 
@@ -530,7 +518,7 @@
 			if(stun_animation)
 				user.do_attack_animation(target)
 			playsound(get_turf(src), on_stun_sound, 75, 1, -1)
-			target.adjustStaminaLoss(30)
+			target.adjustStaminaLoss(60)
 			additional_effects_carbon(target, user)
 			add_fingerprint(user)
 			target.visible_message(desc["visible"], desc["local"])
@@ -647,228 +635,6 @@
 	if(!istype(M))
 		return
 	M.apply_damage(20, STAMINA, null, 0)
-
-///////////////////
-// GLOVE WEAPONS //
-///////////////////		-faster attack speed
-
-
-/obj/item/melee/unarmed
-	name = "glove weapon template"
-	desc = "should not be here"
-	icon = 'icons/fallout/objects/melee/melee.dmi'
-	lefthand_file = 'icons/fallout/onmob/weapons/melee1h_lefthand.dmi'
-	righthand_file = 'icons/fallout/onmob/weapons/melee1h_righthand.dmi'
-	attack_speed = CLICK_CD_MELEE * 0.9
-	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_GLOVES
-	w_class = WEIGHT_CLASS_SMALL
-	flags_1 = CONDUCT_1
-	sharpness = SHARP_NONE
-	throwforce = 10
-	throw_range = 5
-	attack_verb = list("punched", "jabbed", "whacked")
-	var/can_adjust_unarmed = TRUE
-	var/unarmed_adjusted = TRUE
-
-/obj/item/melee/unarmed/equipped(mob/user, slot)
-	. = ..()
-	var/mob/living/carbon/human/H = user
-	if(unarmed_adjusted)
-		mob_overlay_icon = righthand_file
-	if(!unarmed_adjusted)
-		mob_overlay_icon = lefthand_file
-	if(ishuman(user) && slot == SLOT_GLOVES)
-		ADD_TRAIT(user, TRAIT_UNARMED_WEAPON, "glove")
-		if(HAS_TRAIT(user, TRAIT_UNARMED_WEAPON))
-			H.dna.species.punchdamagehigh = force + 8 //The +8 damage is what brings up your punch damage to the unarmed weapon's force fully
-			H.dna.species.punchdamagelow = force + 8
-			H.dna.species.attack_sound = hitsound
-			if(sharpness == SHARP_POINTY || sharpness ==  SHARP_EDGED)
-				H.dna.species.attack_verb = pick("slash","slice","rip","tear","cut","dice")
-			if(sharpness == SHARP_NONE)
-				H.dna.species.attack_verb = pick("punch","jab","whack")
-	if(ishuman(user) && slot != SLOT_GLOVES && !H.gloves)
-		REMOVE_TRAIT(user, TRAIT_UNARMED_WEAPON, "glove")
-		if(!HAS_TRAIT(user, TRAIT_UNARMED_WEAPON))
-			H.dna.species.punchdamagehigh = 1
-			H.dna.species.punchdamagelow = 10
-		if(HAS_TRAIT(user, TRAIT_IRONFIST))
-			H.dna.species.punchdamagehigh = 4
-			H.dna.species.punchdamagelow = 11
-		H.dna.species.attack_sound = 'sound/weapons/punch1.ogg'
-		H.dna.species.attack_verb = "punch"
-
-/obj/item/melee/unarmed/examine(mob/user)
-	. = ..()
-	if(can_adjust_unarmed == TRUE)
-		if(unarmed_adjusted == TRUE)
-			. += "<span class='notice'>Alt-click on [src] to wear it on a different hand. You must take it off first, then put it on again.</span>"
-		else
-			. += "<span class='notice'>Alt-click on [src] to wear it on a different hand. You must take it off first, then put it on again.</span>"
-
-/obj/item/melee/unarmed/AltClick(mob/user)
-	. = ..()
-	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ishuman(user)))
-		return
-	if(can_adjust_unarmed == TRUE)
-		toggle_unarmed_adjust()
-
-/obj/item/melee/unarmed/proc/toggle_unarmed_adjust()
-	unarmed_adjusted = !unarmed_adjusted
-	to_chat(usr, "<span class='notice'>[src] is ready to be worn on another hand.</span>")
-
-
-// Brass knuckles	Keywords: Damage 23
-/obj/item/melee/unarmed/brass
-	name = "brass knuckles"
-	desc = "Hardened knuckle grip that is actually made out of steel. They protect your hand, and do more damage, in unarmed combat."
-	icon_state = "brass"
-	item_state = "brass"
-	attack_verb = list("punched", "jabbed", "whacked")
-	force = 24
-	custom_materials = list(/datum/material/iron = 2000)
-
-// Brass knuckles	Keywords: Damage 23
-/obj/item/melee/unarmed/brass/lovetap
-	name = "Love Tap"
-	desc = "Specially made brass knuckles, designed to get the most out of your love taps."
-	icon_state = "brass"
-	item_state = "brass"
-	attack_verb = list("tapped", "punched", "jabbed", "whacked")
-	force = 28
-
-/obj/item/melee/unarmed/brass/lovetap/attack(mob/living/M, mob/living/user)
-	. = ..()
-	if(!istype(M))
-		return
-	M.apply_damage(25, STAMINA, null, 0)
-
-// Spiked knuckles	Keywords: Damage 24
-/obj/item/melee/unarmed/brass/spiked
-	name = "spiked knuckes"
-	desc = "Unlike normal brass knuckles, these have a metal plate across the knuckles with four spikes on, one for each knuckle. So not only does the victim feel the force of the punch, but also the devastating effects of spikes being driven in."
-	icon_state = "spiked"
-	item_state = "spiked"
-	sharpness = SHARP_POINTY
-	force = 25
-
-// Sappers			Keywords: Damage 25
-/obj/item/melee/unarmed/sappers
-	name = "sappers"
-	desc = "Lead filled gloves which are ideal for beating the crap out of opponents."
-	icon_state = "sapper"
-	item_state = "sapper"
-	w_class = WEIGHT_CLASS_NORMAL
-	force = 25
-
-/obj/item/melee/unarmed/sappers/attack(mob/living/M, mob/living/user)
-	. = ..()
-	if(!istype(M))
-		return
-	M.apply_damage(15, STAMINA, "head", M.run_armor_check("head", "melee"))
-
-// Tiger claws		Keywords: Damage 31, Pointy
-/obj/item/melee/unarmed/tigerclaw
-	name = "tiger claws"
-	desc = "Gloves with short claws built into the palms."
-	icon_state = "tiger_claw"
-	item_state = "tiger_claw"
-	w_class = WEIGHT_CLASS_NORMAL
-	attack_verb = list("slashed", "sliced", "torn", "ripped", "diced", "cut")
-	sharpness = SHARP_POINTY
-	force = 31
-	hitsound = 'sound/weapons/bladeslice.ogg'
-
-// Lacerator		Keywords: Damage 27, Edged, Wound bonus
-/obj/item/melee/unarmed/lacerator
-	name = "lacerator"
-	desc = "Leather gloves with razor blades built into the back of the hand."
-	icon_state = "lacerator"
-	item_state = "lacerator"
-	w_class = WEIGHT_CLASS_NORMAL
-	force = 27
-	bare_wound_bonus = 5
-	sharpness = SHARP_EDGED
-	attack_verb = list("slashed", "sliced", "torn", "ripped", "diced", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
-
-// Mace Glove		Keywords: Damage 30
-/obj/item/melee/unarmed/maceglove
-	name = "mace glove"
-	desc = "Weighted metal gloves that are covered in spikes.  Don't expect to grab things with this."
-	icon_state = "mace_glove"
-	item_state = "mace_glove"
-	w_class = WEIGHT_CLASS_BULKY
-	force = 30
-	sharpness = SHARP_NONE
-
-// Punch Dagger		Keywords: Damage 29, Pointy
-/obj/item/melee/unarmed/punchdagger
-	name = "punch dagger"
-	desc = "A dagger designed to be gripped in the user�s fist with the blade protruding between the middle and ring fingers, to increase the penetration of a punch."
-	icon_state = "punch_dagger"
-	item_state = "punch_dagger"
-	force = 29
-	sharpness = SHARP_POINTY
-	attack_verb = list("stabbed", "sliced", "pierced", "diced", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
-
-/obj/item/melee/unarmed/punchdagger/cyborg
-	name = "assaultron claws"
-	desc = "Razor sharp blades embedded into the grippers of an assaultron. Sharp."
-	icon_state = "tiger_claw"
-	item_state = "tiger_claw"
-	force = 40 //Assaultron, so, makes sense.
-	armour_penetration = 0.5
-
-// Deathclaw Gauntlet	Keywords: Damage 28, AP 1
-/obj/item/melee/unarmed/deathclawgauntlet
-	name = "deathclaw gauntlet"
-	desc = "The severed hand of a mighty Deathclaw, cured, hollowed out, and given a harness to turn it into the deadliest gauntlet the wastes have ever seen."
-	icon_state = "deathclaw_g"
-	item_state = "deathclaw_g"
-	slot_flags = ITEM_SLOT_GLOVES
-	w_class = WEIGHT_CLASS_NORMAL
-	force = 28
-	armour_penetration = 1
-	sharpness = SHARP_EDGED
-	attack_verb = list("slashed", "sliced", "torn", "ripped", "diced", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
-
-// Sentient Deathclaw Gauntlet	Keywords: Damage 30, AP 1
-/obj/item/melee/unarmed/sentientdeathclawgauntlet
-	name = "sentient deathclaw gauntlet"
-	desc = "This is an item created for the sentient deathclaws and is unique, DO NOT USE."
-	icon_state = "sentientdeathclaw_g"
-	item_state = "sentientdeathclaw_g"
-	slot_flags = ITEM_SLOT_GLOVES
-	w_class = WEIGHT_CLASS_NORMAL
-	force = 30
-	armour_penetration = 1
-	sharpness = SHARP_EDGED
-	attack_verb = list("slashed", "sliced", "torn", "ripped", "diced", "mauled")
-	hitsound = 'sound/f13npc/deathclaw/aggro2.ogg'
-
-//Yao Guai Gauntlet	Keywords: Damage 30, Fast, "Saw Bleed" Effect
-/obj/item/melee/unarmed/yaoguaigauntlet
-	name = "yao guai gauntlet"
-	desc = "The severed hand of a yao guai, the hide cured, the muscles and bone removed, and given a harness to turn it into a deadly gauntlet. Usually seen around the hands of the Sorrows tribe."
-	icon_state = "yao_guai_g"
-	item_state = "deathclaw_g"
-	slot_flags = ITEM_SLOT_GLOVES
-	w_class = WEIGHT_CLASS_NORMAL
-	force = 20
-	sharpness = SHARP_EDGED
-	attack_verb = list("slashed", "sliced", "torn", "ripped", "diced", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
-	attack_speed = CLICK_CD_MELEE * 0.7
-
-/obj/item/melee/unarmed/yaoguaigauntlet/attack(mob/living/target, mob/living/user)
-	. = ..()
-	if(!isliving(target))
-		return
-	target.apply_status_effect(/datum/status_effect/stacking/saw_bleed/yaoguaigauntlet)
-
 
 ///////////
 // TOOLS //

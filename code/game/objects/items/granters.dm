@@ -897,6 +897,15 @@
 	remarks = list("Always ensure a safe working environment, promptly clean any chemical mess.", "Improperly stored chemicals can quickly lead to safety hazards.", "Do not abuse chemicals for recreational use in the laboratory!", "Labcoats and goggles not only protect you from burns, but give an aura of authority.", "Keep your laboratory clean and organized, utilize cabinets and shelves.", "Potassium and water should not be mixed, or they will react violently.")
 	crafting_recipe_types = list(/datum/crafting_recipe/jet, /datum/crafting_recipe/turbo, /datum/crafting_recipe/psycho, /datum/crafting_recipe/medx, /datum/crafting_recipe/buffout)
 
+/obj/item/book/granter/trait/legionalchemy
+	name = "Teachings of Mars"
+	desc = "A crude, handmade book containing the essentials on how to work alchemy tables. The cover is stamped with a brass bull."
+	oneuse = TRUE
+	granted_trait = TRAIT_MARS_TEACH
+	traitname = "legion medicine"
+	remarks = list("Sapere aude.", "Ad astra per aspera.", "Mars favors the bold.", "Ars longa, vita brevis.", "Vivamus, moriendum est.", "Sic gorgiamus allos subjectatos nunc.", "Aere perennius.", "Bis dat qui cito dat.", "Finis coronat opus.", "Nullum magnum ingenium sine mixture dementia fuit.", "Nemo mortalium omnibus horis sapit.")
+
+
 /obj/item/book/granter/trait/bigleagues
 	name = "Grognak the Barbarian"
 	desc = "A pulp fiction paperback detailing the adventures of a violent barbarian. Surprisingly, this was sold to children."
@@ -1103,9 +1112,6 @@
 			if("Veteran Table Climber")
 				granted_trait = TRAIT_FREERUNNING
 				traitname = "....climbing tables"
-			if("Desert Affinity")
-				granted_trait = TRAIT_HARD_YARDS
-				traitname = "trekking"
 			if("Spiritual Mending")
 				granted_trait = TRAIT_SURGERY_LOW
 				traitname = "minor surgery"
@@ -1153,3 +1159,32 @@
 	name = "Bone Dancer traditions"
 	crafting_recipe_types = list(/datum/crafting_recipe/tribalwar/bone/lightarmour,/datum/crafting_recipe/tribalwar/bone/armour, /datum/crafting_recipe/tribalwar/bone/heavyarmour,
 								/datum/crafting_recipe/tribalwar/bone/garb,/datum/crafting_recipe/tribalwar/bone/helmet)
+
+/obj/item/book/granter/crafting_recipe/tribal/all
+	name = "Lost traditions"
+	crafting_recipe_types = list(/datum/crafting_recipe/tribalwar/lighttribe, /datum/crafting_recipe/tribalwar/heavytribe, /datum/crafting_recipe/warmace,
+	/datum/crafting_recipe/tribalwar/bone/lightarmour,/datum/crafting_recipe/tribalwar/bone/armour, /datum/crafting_recipe/tribalwar/bone/heavyarmour,
+								/datum/crafting_recipe/tribalwar/bone/garb,/datum/crafting_recipe/tribalwar/bone/helmet,
+								/datum/crafting_recipe/tribalwar/sorrows/armour, /datum/crafting_recipe/tribalwar/sorrows/garb,
+								/datum/crafting_recipe/tribalwar/sorrows/femalegarb,
+								/datum/crafting_recipe/tribalwar/sorrows/yaoguaigauntlet,
+								/datum/crafting_recipe/tribalwar/eighties/lightarmour, /datum/crafting_recipe/tribalwar/eighties/armour,
+								/datum/crafting_recipe/tribalwar/eighties/garb,
+								/datum/crafting_recipe/tribalwar/eighties/femalegarb, /datum/crafting_recipe/tribalwar/eighties/heavyarmour,
+								/datum/crafting_recipe/tribalwar/rustwalkers/lightarmour, /datum/crafting_recipe/tribalwar/rustwalkers/armour, /datum/crafting_recipe/tribalwar/rustwalkers/garb,
+								/datum/crafting_recipe/tribalwar/rustwalkers/femalegarb, /datum/crafting_recipe/tribalwar/rustwalkers/heavyarmour,
+								/datum/crafting_recipe/tribalwar/deadhorses/lightarmour, /datum/crafting_recipe/tribalwar/deadhorses/armour,
+								/datum/crafting_recipe/tribalwar/deadhorses/garb,
+								/datum/crafting_recipe/tribalwar/deadhorses/femalegarb, /datum/crafting_recipe/tribalwar/deadhorses/heavyarmour,
+								/datum/crafting_recipe/tribalwar/whitelegs/lightarmour, /datum/crafting_recipe/tribalwar/whitelegs/armour,
+								/datum/crafting_recipe/tribalwar/whitelegs/garb,
+								/datum/crafting_recipe/tribalwar/whitelegs/femalegarb, /datum/crafting_recipe/tribalwar/whitelegs/heavyarmour
+								)
+
+/obj/item/book/granter/trait/bibledog
+	name = "Burned book"
+	desc = "This book doesn't seem very useful."
+	oneuse = TRUE
+	granted_trait = TRAIT_HOLY
+	traitname = "holy"
+	remarks = list("You already know everything")

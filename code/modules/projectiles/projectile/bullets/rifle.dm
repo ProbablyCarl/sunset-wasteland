@@ -39,23 +39,26 @@ heavy rifle calibers (12.7, 14mm, 7.62): Uranium, Contaminated, Incin
 
 /obj/item/projectile/bullet/a556
 	name = "5.56 FMJ bullet"
-	damage = 32
-	wound_bonus = 24
-	bare_wound_bonus = 18
+	damage = 26
+	wound_bonus = 18
+	bare_wound_bonus = 24
+	var/extra_speed = 200
 
 /obj/item/projectile/bullet/a556/match
 	name = "5.56 match bullet"
-	damage = 28
-	armour_penetration = 0.21
+	damage = 20
+	armour_penetration = 0.35
 	wound_bonus = 18
 	bare_wound_bonus = 0
-	var/extra_speed = 200
+	extra_speed = 500
 
 /obj/item/projectile/bullet/a556/sport
 	name = ".223 FMJ bullet"
-	damage = 28
-	wound_bonus = 32
-	bare_wound_bonus = 32//Gives a reason to actually use this round.
+	damage = 24
+	wound_bonus = 18
+	bare_wound_bonus = 32 //Gives a reason to actually use this round.
+	supereffective_damage = 15
+	supereffective_faction = list("hostile", "ant", "deathclaw", "cazador", "china", "gecko", "radscorpion") //5.56 being effective against the Chinese is a funny code joke that someone will look at like 4 years from now on and cry about.
 
 /obj/item/projectile/bullet/a556/rubber
 	name = "5.56 rubber bullet"
@@ -106,6 +109,8 @@ heavy rifle calibers (12.7, 14mm, 7.62): Uranium, Contaminated, Incin
 	damage = 28
 	wound_bonus = 32
 	bare_wound_bonus = 32
+	supereffective_damage = 14
+	supereffective_faction = list("hostile", "ant", "deathclaw", "cazador", "gecko", "radscorpion")
 
 /obj/item/projectile/bullet/a762/rubber
 	name = "7.62 rubber bullet"
@@ -147,6 +152,8 @@ heavy rifle calibers (12.7, 14mm, 7.62): Uranium, Contaminated, Incin
 	zone_accuracy_factor = 100
 	wound_bonus = 60
 	bare_wound_bonus = 80//Same as the HMG.
+	supereffective_damage = 125
+	supereffective_faction = list("hostile", "ant", "supermutant", "deathclaw", "cazador", "raider", "china", "gecko", "wastebot", "radscorpion")
 
 /obj/item/projectile/bullet/a50MG/incendiary
 	damage = 60
@@ -189,21 +196,24 @@ heavy rifle calibers (12.7, 14mm, 7.62): Uranium, Contaminated, Incin
 	name = "12.7mm contaminated bullet"
 	damage = 50
 	var/smoke_radius = 1
+	var/datum/effect_system/smoke_spread/chem/smoke_system
 
 /obj/item/projectile/bullet/a50MG/contam/Initialize()
 	. = ..()
 	create_reagents(15, NO_REACT, NO_REAGENTS_VALUE)
+	smoke_system = new
+	smoke_system.attach(src)
+	smoke_system.set_up(src.reagents, smoke_radius, src, 0)
 	reagents.add_reagent(/datum/reagent/toxin/metabtoxin, 15)
 
 /obj/item/projectile/bullet/a50MG/contam/on_hit(atom/target, blocked = FALSE)
-	var/location = get_turf(src)
-	var/datum/effect_system/smoke_spread/chem/S = new
-	S.attach(location)
-	playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
-	if(S)
-		S.set_up(src.reagents, smoke_radius, location, 0)
-		S.start()
+	playsound(get_turf(src), 'sound/effects/smoke.ogg', 50, 1, -3)
+	smoke_system?.start()
 	..()
+
+/obj/item/projectile/bullet/a50MG/contam/Destroy()
+	QDEL_NULL(smoke_system)
+	return ..()
 
 /obj/item/projectile/bullet/a50MG/depleteduranium//Used, currently, for the emplaced MG.
 	name = ".50 DU-bullet"
@@ -254,8 +264,8 @@ heavy rifle calibers (12.7, 14mm, 7.62): Uranium, Contaminated, Incin
 
 /obj/item/projectile/bullet/a473/minigun
 	name = "4.73 FMJ bullet"
-	damage = 18
-	armour_penetration = 0.1
+	damage = 14
+	armour_penetration = 0
 	wound_bonus = 24
 	bare_wound_bonus = 32
 
@@ -304,6 +314,8 @@ heavy rifle calibers (12.7, 14mm, 7.62): Uranium, Contaminated, Incin
 	bare_wound_bonus = 10
 	armour_penetration = 0.45
 	var/extra_speed = 200
+	supereffective_damage = 10
+	supereffective_faction = list("hostile", "ant", "supermutant", "deathclaw", "cazador", "raider", "china", "gecko", "wastebot", "radscorpion")
 
 /obj/item/projectile/bullet/m5mm/simple //for simple mobs, separate to allow balancing
 	name = "5mm bullet"
@@ -337,6 +349,8 @@ heavy rifle calibers (12.7, 14mm, 7.62): Uranium, Contaminated, Incin
 	damage = 52
 	armour_penetration = 0.9
 	pixels_per_second = TILES_TO_PIXELS(100)
+	supereffective_damage = 58
+	supereffective_faction = list("hostile", "ant", "supermutant", "deathclaw", "cazador", "raider", "china", "gecko", "wastebot", "radscorpion")
 
 /obj/item/projectile/bullet/c2mm/blender //welcome to pain town
 	name = "2mm blender projectile"

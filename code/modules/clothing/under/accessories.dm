@@ -430,7 +430,7 @@
 	minimize_when_attached = TRUE
 
 /obj/item/clothing/accessory/bos/juniorpaladin
-	name = "Junior Paladin pins"
+	name = "Paladin Squire pins"
 	desc = "A silver pin with one device, and purple coloring. Worn by the Paladin-in-Training of the Brotherhood."
 	icon_state = "juniorpaladin"
 	item_color = "juniorpaladin"
@@ -505,6 +505,12 @@
 	icon_state = "elder"
 	item_color = "elder"
 	minimize_when_attached = TRUE
+
+/obj/item/clothing/accessory/bos/inquis_acol
+	name = "Inquisitorial Acolyte band"
+	desc = "An odd bit of fabric, denoting the wearer as someone important. How're you seeing this?"
+	icon_state = "remnant"
+	item_color = "remnant"
 
 //Ranks
 

@@ -146,7 +146,7 @@
 	stop_playing()
 	SSinstruments.on_song_del(src)
 	lines = null
-	using_instrument = null
+	set_instrument(null)
 	allowed_instrument_ids = null
 	parent = null
 	return ..()
@@ -407,6 +407,10 @@
 /datum/song/holoparasite/New(atom/parent, list/instrument_ids)
 	. = ..()
 	stand = istype(parent, /mob/living/simple_animal/hostile/guardian) && parent
+
+/datum/song/holoparasite/Destroy()
+	stand = null
+	return ..()
 
 /datum/song/holoparasite/updateDialog()
 	stand.ui_interact(src)

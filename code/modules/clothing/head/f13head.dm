@@ -364,12 +364,33 @@
 
 /obj/item/clothing/head/helmet/f13/power_armor/t45d
 	name = "T-45d power helmet"
-	desc = "t's an old pre-War power armor helmet. It's pretty hot inside of it."
+	desc = "An old pre-War power armor helmet. It's pretty hot inside of it."
 	icon_state = "t45dhelmet0"
 	item_state = "t45dhelmet0"
 	actions_types = list(/datum/action/item_action/toggle_helmet_light)
 	armor = list("melee" = 72.5, "bullet" = 72.5, "laser" = 72.5, "energy" = 25, "bomb" = 65, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 40)
 	salvaged_type = /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/t45d
+
+//Fluff Helmet
+/obj/item/clothing/head/helmet/f13/power_armor/t45d/refurb
+	name = "Refurbished T-45d power helmet"
+	desc = "An old pre-War power armor helmet. This one appears to have been refitted. Probably many times over, at that, with its patchwork internals."
+	icon_state = "t45dhelmet0"
+	item_state = "t45dhelmet0"
+	actions_types = list(/datum/action/item_action/toggle_helmet_light)
+	armor = list("melee" = 45, "bullet" = 45, "laser" = 45, "energy" = 25, "bomb" = 50, "bio" = 60, "rad" = 10, "fire" = 60, "acid" = 20, "wound" = 50)
+	salvaged_type = null
+
+//////
+// Raider Boss
+//////
+/obj/item/clothing/head/helmet/f13/power_armor/t45d/raider
+	name = "Raider Captain's power helmet"
+	desc = "The Raider Captain's helmet for their set of refurbished T-45d power armor. How'd you get your hands on this?"
+	icon_state = "raiderpa_helm"
+	item_state = "raiderpa_helm"
+	salvaged_type = /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/t45b/raider
+	actions_types = null
 
 //////
 // Sheriff's Suit
@@ -460,6 +481,16 @@
 	armor = list("melee" = 75, "bullet" = 75, "laser" = 75, "energy" = 27, "bomb" = 64, "bio" = 100, "rad" = 99, "fire" = 90, "acid" = 40, "wound" = 75)
 	salvaged_type = /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/midwest/hardened
 
+//Inquisitor / Acolyte
+/obj/item/clothing/head/helmet/f13/power_armor/midwest_inquis
+	name = "Midwestern Inquisitorial APA helmet"
+	desc = "This helmet belongs to the Midwestern branch of the Brotherhood of Steel. It appears to be painted in Inquisitorial colours."
+	icon_state = "t51wboshelmet"
+	item_state = "t51wboshelmet"
+	actions_types = list(/datum/action/item_action/toggle_helmet_light)
+	armor = list("melee" = 75, "bullet" = 75, "laser" = 75, "energy" = 75, "bomb" = 62, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 40, "wound" = 50)
+	salvaged_type = null
+
 /obj/item/clothing/head/helmet/f13/power_armor/excavator
 	name = "excavator power helmet"
 	desc = "The helmet of the excavator power armor suit."
@@ -482,17 +513,37 @@
 	armor = list("melee" = 85, "bullet" = 85, "laser" = 87, "energy" = 37, "bomb" = 72, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 100)
 
 
-//Part of the peacekeeper enclave stuff, adjust values as needed.
+//Part of the Enclave stuff, adjust values as needed.
 /obj/item/clothing/head/helmet/f13/power_armor/x02helmet
-	name = "Enclave power armor helmet"
+	name = "APA Mk II helmet"
 	desc = "The Enclave Mark II Powered Combat Armor helmet."
-	icon_state = "advanced"
-	item_state = "advanced"
+	icon_state = "x-01PA"
+	item_state = "x-01PA"
 	slowdown = 0.1
-	armor = list("melee" = 85, "bullet" = 85, "laser" = 85, "energy" = 65, "bomb" = 70, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 75)
+	armor = list("melee" = 80, "bullet" = 80, "laser" = 85, "energy" = 85, "bomb" = 70, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 50)
 	actions_types = list(/datum/action/item_action/toggle_helmet_light)
 	salvaged_type = /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/x02
 
+/obj/item/clothing/head/helmet/f13/power_armor/tesla
+	name = "APA-T Mk II helmet"
+	desc = "The Enclave Mark II Powered Combat Armor helmet, rigged with heavy electronics."
+	icon_state = "x-01tesla"
+	item_state = "x-01tesla"
+	slowdown = 0.1
+	armor = list("melee" = 75, "bullet" = 75, "laser" = 95, "energy" = 95, "bomb" = 70, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 50)
+	actions_types = list(/datum/action/item_action/toggle_helmet_light)
+
+/obj/item/clothing/head/helmet/f13/power_armor/x02helmet/eastcoast
+	name = "X-02 power helmet"
+	desc = "A very rare X-02 power armor helmet."
+	icon_state = "PA_helmet_x02"
+	item_state = "PA_helmet_x02"
+
+/obj/item/clothing/head/helmet/f13/power_armor/tesla/eastcoast
+	name = "X-02 tesla helmet"
+	desc = "A very rare X-02 power armor helmet. This one is fitted with extra electronics to be used with energy-based weapons."
+	icon_state = "PA_helmet_x02"
+	item_state = "PA_helmet_x02"
 
 //Generic Tribal - For Wayfarer specific, see f13factionhead.dm
 
@@ -905,3 +956,9 @@
 	icon_state = "bone_dancer_helmet"
 	item_state = "bone_dancer_helmet"
 	strip_delay = 100
+
+/obj/item/clothing/head/helmet/f13/ncr/rangercombat/finlayranger
+	name = "reclaimed ranger-hunter combat helmet"
+	desc = "A modified ranger helmet now utilised by the brotherhood of steel, functionally identical to a standard helmet."
+	icon_state = "finlayhelmet"
+	item_state = "finlayhelmet"

@@ -338,7 +338,7 @@
 	item_path = /obj/item/grenade/f13/dynamite
 
 /datum/gang_item/equipment/he
-	name = "High Explosive Grenade"
+	name = "Frag Grenade"
 	id = "hegrenade"
 	cost = 130
 	item_path = /obj/item/grenade/f13/frag
@@ -355,8 +355,8 @@
 	item_path = /obj/item/storage/box/chemmachine
 
 /obj/item/storage/box/chemmachine
-	name = "chem machine Bundle"
-	desc = "You made a bomb, blew up a Village, And still, you kept making the machines.. "
+	name = "chem machine bundle"
+	desc = "You made a bomb, blew up a village, and still, you kept making the machines..."
 
 /obj/item/storage/box/chemmachine/PopulateContents()
 	new /obj/item/circuitboard/machine/chem_dispenser(src)

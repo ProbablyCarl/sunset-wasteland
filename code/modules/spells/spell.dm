@@ -37,6 +37,8 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 /obj/effect/proc_holder/Destroy()
 	if(ranged_ability_user)
 		remove_ranged_ability()
+	ranged_ability_user = null
+	QDEL_NULL(action)
 	return ..()
 
 /obj/effect/proc_holder/singularity_act()
@@ -213,7 +215,6 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 
 /obj/effect/proc_holder/spell/Destroy()
 	STOP_PROCESSING(SSfastprocess, src)
-	qdel(action)
 	return ..()
 
 /obj/effect/proc_holder/spell/Trigger(mob/user, skip_can_cast = TRUE)

@@ -25,7 +25,7 @@
 	force = 15 //Decent clubs generally speaking
 	fire_delay = 4 //Typical pump action, pretty fast.
 	spread = 2
-	recoil = 0.1
+	recoil = 1
 	can_scope = FALSE
 	flags_1 =  CONDUCT_1
 	casing_ejector = FALSE
@@ -98,7 +98,7 @@
 ////////////////////////////////////////
 
 
-//Caravan shotgun							Keywords: Shotgun, Double barrel, saw-off, extra damage +3.2, extra pen 10%
+//Caravan shotgun							Keywords: Shotgun, Double barrel, saw-off, extra damage +3, extra pen 5%
 /obj/item/gun/ballistic/revolver/caravan_shotgun
 	name = "caravan shotgun"
 	desc = "A common over-under double barreled shotgun made in the post-war era."
@@ -110,12 +110,15 @@
 	icon_prefix = "shotgundouble"
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY
-	fire_delay = 0.5
+	fire_delay = 2
+	spread = 20
 	force = 20
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual/simple
 	sawn_desc = "Short and concealable, terribly uncomfortable to fire, but worse on the other end."
 	fire_sound = 'sound/f13weapons/caravan_shotgun.ogg'
 	recoil = 1.55
+	extra_damage = 3
+	extra_penetration = 0.05
 
 /obj/item/gun/ballistic/revolver/caravan_shotgun/attackby(obj/item/A, mob/user, params)
 	..()
@@ -135,7 +138,7 @@
 		icon_state = "[initial(icon_state)]"
 
 
-//Widowmaker				Keywords: Shotgun, Double barrel, saw-off, extra damage +2, extra pen 5%
+//Widowmaker				Keywords: Shotgun, Double barrel, saw-off, extra damage +2, extra pen 15%
 /obj/item/gun/ballistic/revolver/widowmaker
 	name = "Winchester Widowmaker"
 	desc = "Old-world Winchester Widowmaker double-barreled 12 gauge shotgun, with mahogany furniture"
@@ -148,11 +151,14 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_HEAVY
-	fire_delay = 0.5
+	fire_delay = 2
+	spread = 20
 	force = 20
 	sawn_desc = "Someone took the time to chop the last few inches off the barrel and stock of this shotgun. Now, the wide spread of this hand-cannon's short-barreled shots makes it perfect for short-range crowd control."
 	fire_sound = 'sound/f13weapons/max_sawn_off.ogg'
 	recoil = 0.55
+	extra_damage = 2
+	extra_penetration = 0.15
 
 /obj/item/gun/ballistic/revolver/widowmaker/attackby(obj/item/A, mob/user, params)
 	..()
@@ -355,6 +361,23 @@
 		return
 	toggle_tube(user)
 
+//Neostead 2000 NO TUBE SWAP							Keywords: Khan, Shotgun, Semi-auto, 12 rounds internal
+/obj/item/gun/ballistic/shotgun/automatic/combat/neostead_noalt
+	name = "Neostead 2000"
+	desc = "An advanced shotgun with two separate magazine tubes."
+	icon_state = "neostead"
+	item_state = "shotguncity"
+	fire_delay = 5
+	recoil = 1.3
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/tube_noalt
+	force = 10
+
+/obj/item/gun/ballistic/shotgun/automatic/combat/neostead_noalt/khan
+	name = "Cold Water"
+	desc = "A personalized Neostead shotgun belonging to a Senior Enforce of the Great Khans."
+	fire_delay = 3.5
+	recoil = 1
+	force = 12
 
 //Winchester City-Killer				Keywords: Shotgun, Full-auto, 10 rounds internal
 /obj/item/gun/ballistic/shotgun/automatic/combat/citykiller
@@ -387,6 +410,14 @@
 	automatic_burst_overlay = FALSE
 	semi_auto = TRUE
 	fire_sound = 'sound/f13weapons/riot_shotgun.ogg'
+
+//Boss' unique riot shotgun.
+/obj/item/gun/ballistic/automatic/shotgun/riot/boss
+	name = "Left Hand"
+	desc = "A compact riot shotgun with a large ammo drum and semi-automatic fire, designed to fight in close quarters. \
+	This one has engravings, dedicated to a 'Captain' of some sort. Odd."
+	fire_delay = 2
+	recoil = 1
 
 /obj/item/gun/ballistic/automatic/shotgun/pancor
 	name = "Pancor Jackhammer"

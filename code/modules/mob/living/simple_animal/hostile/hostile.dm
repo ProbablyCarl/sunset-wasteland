@@ -133,7 +133,7 @@
 		Move(get_step(src,chosen_dir))
 		face_atom(target) //Looks better if they keep looking at you when dodging
 
-/mob/living/simple_animal/hostile/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1)
+/mob/living/simple_animal/hostile/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1, damage_bonus = 0)
 	if (peaceful == TRUE)
 		peaceful = FALSE
 	if(stat == CONSCIOUS && !target && AIStatus != AI_OFF && !client && user)
@@ -168,11 +168,12 @@
 	if(!search_objects)
 		. = hearers(vision_range, targets_from) - src //Remove self, so we don't suicide
 
-		var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha, /obj/structure/destructible/clockwork/ocular_warden,/obj/item/electronic_assembly))
+		var/static/hostile_objects = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha, /obj/structure/destructible/clockwork/ocular_warden,/obj/item/electronic_assembly))
 
-		for(var/HM in typecache_filter_list(range(vision_range, targets_from), hostile_machines))
-			if(can_see(targets_from, HM, vision_range))
-				. += HM
+		for(var/obj/hostile_obj in view(vision_range, targets_from))
+			if(!hostile_objects[hostile_obj.type])
+				continue
+			. += hostile_obj
 	else
 		. = oview(vision_range, targets_from)
 

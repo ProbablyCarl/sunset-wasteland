@@ -1,4 +1,3 @@
-//It looks like var/faction controls what becomes visible on setup. Should likely be fixed or something, but I'm not doing it.
 /datum/job/enclave
 	department_flag = ENCLAVE
 	selection_color = "#434944"
@@ -9,6 +8,7 @@
 	minimal_access = list(ACCESS_ENCLAVE, ACCESS_SECURITY, ACCESS_AI_UPLOAD)
 	forbids = "Enclave taboos: Aiding Brotherhood or Republic members in any way no matter how small."
 	enforces = "Enclave rules: Stay in uniform. Act mature and respectful. Obey orders and always remember you are fighting for the only true legitimate power in this land of savages. Wearing gasmasks outside the compound is encouraged but not required."
+	custom_spawn_text = "As an Enclave member, you are <b>forbidden</b> from raiding other factions."
 	objectivesList = list("Department of Defense advisory: Collect resources, attrition is depleting our reserves.", "Science Divison advisory: Capture human subjects for experiments, alive.")
 
 /datum/outfit/job/enclave
@@ -63,8 +63,9 @@
 	exp_requirements = 1500
 
 	loadout_options = list(
-		/datum/outfit/loadout/lt_ballistics, // G11 and 14mm
-		/datum/outfit/loadout/lt_plasma, // Plasma Rifle and Plasma Glock
+		/datum/outfit/loadout/lt_ballistics, // G11 and Plasma Glock
+		/datum/outfit/loadout/lt_plasma, // Plasma Rifle and 14mm
+		/datum/outfit/loadout/lt_rhino, //Gold Sniper Rifle with slowdown and .44 Rhino
 		)
 
 
@@ -113,6 +114,16 @@
 		/obj/item/grenade/f13/plasma = 2,
 		)
 
+/datum/outfit/loadout/lt_rhino
+	name = "Golden Hand"
+	suit_store = /obj/item/gun/ballistic/automatic/marksman/sniper/america
+	backpack_contents = list(
+		/obj/item/ammo_box/magazine/w308 = 2,
+		/obj/item/ammo_box/m44box = 1,
+		/obj/item/gun/ballistic/revolver/m29/rhino_america = 2,
+		/obj/item/grenade/f13/plasma = 2,
+		)
+
 /datum/outfit/job/enclave/peacekeeper/enclavelt/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	..()
 	if(visualsOnly)
@@ -144,14 +155,13 @@
 	loadout_options = list(
 		/datum/outfit/loadout/gysgt_ballistics, // Vindicator
 		/datum/outfit/loadout/gysgt_laser, // Multiplas
-		/datum/outfit/loadout/gysgt_minigun, // Laser gatling
 		)
 
 /datum/outfit/job/enclave/peacekeeper/f13gysergeant
 	name = "Enclave Platoon Sergeant"
 	jobtype = /datum/job/enclave/f13gysergeant
-	head = /obj/item/clothing/head/helmet/f13/power_armor/x02helmet
-	suit = /obj/item/clothing/suit/armor/f13/power_armor/x02
+	head = /obj/item/clothing/head/helmet/f13/power_armor/tesla
+	suit = /obj/item/clothing/suit/armor/f13/power_armor/tesla
 	accessory = /obj/item/clothing/accessory/enclave/sergeant_firstclass
 	ears = /obj/item/radio/headset/headset_enclave/command
 	l_pocket = /obj/item/clothing/mask/chameleon
@@ -183,13 +193,6 @@
 	backpack_contents = list(
 		/obj/item/stock_parts/cell/ammo/mfc = 4,
 		/obj/item/grenade/f13/plasma = 2,
-		)
-
-/datum/outfit/loadout/gysgt_minigun
-	name = "Armored Support Kit"
-	suit_store = 	/obj/item/encminigunpack
-	backpack_contents = list(
-		/obj/item/stock_parts/cell/ammo/ecp = 2,
 		)
 
 /datum/outfit/job/enclave/peacekeeper/f13gysergeant/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
@@ -233,7 +236,7 @@
 
 	backpack_contents = list(
 		/obj/item/reagent_containers/hypospray/medipen/stimpak = 2,
-		/obj/item/grenade/frag = 1,
+		/obj/item/grenade/f13/frag = 1,
 		/obj/item/pda = 1,
 		/obj/item/storage/bag/money/small/wastelander = 1,
 		/obj/item/melee/onehanded/knife/survival = 1,
@@ -329,10 +332,8 @@
 	mask = /obj/item/clothing/mask/gas/welding
 	gloves = /obj/item/clothing/gloves/color/yellow
 	head = /obj/item/clothing/head/hardhat/orange
-	suit_store = /obj/item/gun/ballistic/revolver/grenadelauncher
 	backpack_contents = list(
 		/obj/item/storage/belt/utility = 1,
-		/obj/item/ammo_box/a40mm = 2,
 		/obj/item/shovel/trench = 1,
 		/obj/item/metaldetector = 1
 	)
@@ -416,7 +417,7 @@
 		/obj/item/grenade/chem_grenade/cleaner = 1,
 		/obj/item/pda = 1,
 		/obj/item/gun/energy/gammagun = 1,
-		/obj/item/stock_parts/cell/ammo/ec = 2,
+		/obj/item/stock_parts/cell/ammo/mfc = 2,
 		/obj/item/storage/bag/money/small/wastelander = 1,
 		/obj/item/melee/onehanded/knife/survival = 1,
 		/obj/item/clothing/head/beret/enclave/science = 1,
@@ -439,6 +440,7 @@
 	ADD_TRAIT(H, TRAIT_ENCLAVE_CODES, src)
 //	ADD_TRAIT(H, TRAIT_POOR_AIM, src)
 	H.grant_language(/datum/language/codespeak, TRUE, TRUE, LANGUAGE_MIND)
+	H.mind.teach_crafting_recipe(/datum/crafting_recipe/needle)
 
 //Pilot
 /datum/job/enclave/enclavepilot
@@ -478,6 +480,7 @@
 	if(visualsOnly)
 		return
 	ADD_TRAIT(H, TRAIT_PILOT, src)
+	ADD_TRAIT(H, TRAIT_RESEARCHER, src)
 	ADD_TRAIT(H, TRAIT_ENCLAVE_CODES, src)
 	if(H.mind)
 		var/obj/effect/proc_holder/spell/terrifying_presence/S = new /obj/effect/proc_holder/spell/terrifying_presence
@@ -488,8 +491,8 @@
 /datum/job/enclave/f13BDUTY
 	title = "Enclave Bunker Duty"
 	flag = F13USBDUTY
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 6
+	spawn_positions = 6
 	description = "You're a small garrison within a side entrance of a far larger complex. This complex sits within the Casper mountain range. You're a non-combatant, skilled in a field outside of exterior operations. Given your value, you aren't permitted to engage in conflict."
 	enforces = "You are not permited to leave the base. You are a non-combatant. You cannot join any raids or battles on the surface."
 	supervisors = "Everyone else."
@@ -503,7 +506,6 @@
 		/datum/outfit/loadout/bunkerduty_janny,
 		/datum/outfit/loadout/bunkerduty_chaplain,
 		/datum/outfit/loadout/bunkerduty_cook,
-		/datum/outfit/loadout/bunkerduty_is,
 		)
 
 /datum/outfit/job/enclave/noncombat/f13BDUTY
@@ -572,23 +574,81 @@
 		/obj/item/kitchen/knife/butcher = 1,
 		)
 
-//Internal Security. Takes the role of general Security Detail.
-// RP loadout primarily. Gets the incredibly rare 14mm SMG and a subtype of the Enclave Remnant plasma pistol.
-// Not a big deal. This has the RP flag as a Bunker Duty loadout.
-/datum/outfit/loadout/bunkerduty_is
-	name = "Internal Security"
+// Internal Security. Takes the role of general Security Detail.
+// RP job primarily. Gets the incredibly rare and powerful plasma rifle, alongside a subtype of the Enclave Remnant plasma pistol.
+// Not a big deal. This has the RP flag
+/datum/job/enclave/enc_is
+	title = "Enclave Internal Security"
+	flag = F13USIS
+	total_positions = 3
+	spawn_positions = 3
+	description = "As Internal Security, you answer to no one, aside from high-command directly. Despite that, you're tasked to maintain order and security within the bunker. Assist the Science division with experiments when possible, and further the Lieutenant's goals."
+	enforces = "You are not permited to leave the base under any circumstance. You cannot join any raids or battles on the surface."
+	supervisors = "United States Secret Service"
+	access = list(ACCESS_ENCLAVE, ACCESS_CHANGE_IDS, ACCESS_ENCLAVE_COMMAND, ACCESS_SECURITY, ACCESS_AI_UPLOAD)
+	outfit = /datum/outfit/job/enclave/noncombat/enc_is
+	roleplay_exclusive_notify = 1
+	req_admin_notify = 1
+	exp_requirements = 2500//Well above Lieutenant for good reason. It's RP exclusive, and comes with some heavy perks.
+
+	loadout_options = list(
+		/datum/outfit/loadout/is_twolt,
+		/datum/outfit/loadout/is_lt,
+		/datum/outfit/loadout/is_cap,
+		)
+
+/datum/outfit/job/enclave/noncombat/enc_is
+	name = "Enclave Internal Security"
+	jobtype = /datum/job/enclave/enc_is
+	id = /obj/item/card/id/dogtag/enclave/officer
+	glasses = /obj/item/clothing/glasses/sunglasses/big
+	uniform = /obj/item/clothing/under/f13/enclave/officer
 	head = /obj/item/clothing/head/f13/enclave
 	suit = /obj/item/clothing/suit/armor/f13/enclavetrenchcoat
-	suit_store = /obj/item/gun/ballistic/automatic/smg/smg14
+	suit_store = /obj/item/gun/energy/laser/plasma
+
 	backpack_contents = list(
-		/obj/item/ammo_box/magazine/smg14 = 2,
+		/obj/item/stock_parts/cell/ammo/mfc = 3,
 		/obj/item/stock_parts/cell/ammo/ec = 2,
 		/obj/item/restraints/handcuffs = 1,
 		/obj/item/melee/classic_baton = 1,
 		/obj/item/melee/onehanded/knife/survival = 1,
-		/obj/item/clothing/accessory/cia_badge = 1,
 		/obj/item/gun/energy/laser/plasma/pistol/remnant/is = 1,
 		/obj/item/storage/belt/holster = 1,
+		/obj/item/reagent_containers/hypospray/medipen/stimpak = 2,
+		/obj/item/storage/survivalkit_aid_adv = 1,
+		)
+
+/datum/outfit/job/enclave/noncombat/enc_is/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	..()
+	if(visualsOnly)
+		return
+	ADD_TRAIT(H, TRAIT_PA_WEAR, src)
+	ADD_TRAIT(H, TRAIT_ENCLAVE_CODES, src)
+	if(H.mind)
+		var/obj/effect/proc_holder/spell/terrifying_presence/S = new /obj/effect/proc_holder/spell/terrifying_presence
+		H.mind.AddSpell(S)
+	H.grant_language(/datum/language/codespeak, TRUE, TRUE, LANGUAGE_MIND)
+
+/datum/outfit/loadout/is_twolt
+	name = "Second Lieutenant"
+	backpack_contents = list(
+		/obj/item/clothing/accessory/cia_badge = 1,
+		/obj/item/clothing/accessory/enclave/second_lieutenant = 1,
+		)
+
+/datum/outfit/loadout/is_lt
+	name = "First Lieutenant"
+	backpack_contents = list(
+		/obj/item/clothing/accessory/cia_badge = 1,
+		/obj/item/clothing/accessory/enclave/first_lieutenant = 1,
+		)
+
+/datum/outfit/loadout/is_cap
+	name = "Captain"
+	backpack_contents = list(
+		/obj/item/clothing/accessory/cia_badge = 1,
+		/obj/item/clothing/accessory/enclave/captain = 1
 		)
 
 // Enclave Citizen

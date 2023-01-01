@@ -160,7 +160,7 @@
 	user.transferItemToLoc(O,src)
 	installed_brain = O
 	can_be_asked_input = FALSE
-	to_chat(user, "<span class='notice'>You gently place \the man-machine interface inside the tank.</span>")
+	to_chat(user, "<span class='notice'>You gently place \the [O] inside the tank.</span>")
 	to_chat(O, "<span class='notice'>You are slowly being placed inside the man-machine-interface tank.</span>")
 	O.brainmob.remote_control=src
 	set_pin_data(IC_OUTPUT, 1, O)
@@ -177,7 +177,7 @@
 
 /obj/item/integrated_circuit/input/mmi_tank/Destroy()
 	RemoveBrain()
-	..()
+	return ..()
 
 /obj/item/integrated_circuit/input/mmi_tank/relaymove(n,dir)
 	set_pin_data(IC_OUTPUT, 2, dir)
@@ -320,7 +320,7 @@
 
 /obj/item/integrated_circuit/input/pAI_connector/Destroy()
 	RemovepAI()
-	..()
+	return ..()
 
 /obj/item/integrated_circuit/input/pAI_connector/proc/RemovepAI()
 	if(installed_pai)

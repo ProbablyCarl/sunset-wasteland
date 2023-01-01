@@ -11,14 +11,17 @@
 	icon_living = "deathclaw"
 	icon_dead = "deathclaw_dead"
 	icon_gib = "deathclaw_gib"
+	robust_searching = 1
 	maxHealth = 750
-	speed = -1
 	health = 750
 	obj_damage = 200
 	armour_penetration = 0.6
 	melee_damage_lower = 40
 	melee_damage_upper = 50
 	footstep_type = FOOTSTEP_MOB_HEAVY
+	environment_smash = ENVIRONMENT_SMASH_RWALLS
+	speed = -1.8//Actual speed handled by move_to_delay
+	move_to_delay = 1.8
 
 	gender = MALE
 	a_intent = INTENT_HARM //So we can not move past them.
@@ -48,21 +51,20 @@
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	faction = list("deathclaw")
 	gold_core_spawnable = HOSTILE_SPAWN
-	var/charging = FALSE
 	move_resist = MOVE_FORCE_OVERPOWERING
 	emote_taunt_sound = list('sound/f13npc/deathclaw/taunt.ogg')
 	aggrosound = list('sound/f13npc/deathclaw/aggro1.ogg', 'sound/f13npc/deathclaw/aggro2.ogg', )
 	idlesound = list('sound/f13npc/deathclaw/idle.ogg',)
 	death_sound = 'sound/f13npc/deathclaw/death.ogg'
-
-
+/*
+	var/charging = FALSE
+*/
 /mob/living/simple_animal/hostile/deathclaw/playable
 	emote_taunt_sound = null
 	emote_taunt = null
 	aggrosound = null
 	idlesound = null
 	see_in_dark = 8
-	environment_smash = 2 //can smash walls
 	wander = FALSE
 
 // Mother death claw
@@ -75,7 +77,7 @@
 	stat_attack = UNCONSCIOUS
 	melee_damage_lower = 50
 	melee_damage_upper = 55
-	armour_penetration = 0.8
+	armour_penetration = 0.7
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	color = rgb(95,104,94)
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/deathclaw = 6,
@@ -119,7 +121,7 @@
 	stat_attack = UNCONSCIOUS
 	melee_damage_lower = 55
 	melee_damage_upper = 55
-	armour_penetration = 0.9
+	armour_penetration = 0.8
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/deathclaw = 6)
 
@@ -168,7 +170,7 @@
 	stat_attack = UNCONSCIOUS
 	melee_damage_lower = 70
 	melee_damage_upper = 80
-	armour_penetration = 1
+	armour_penetration = 0.9
 	footstep_type = FOOTSTEP_MOB_HEAVY
 
 
@@ -199,7 +201,7 @@
 	if(!ishuman(M) || M.health <= 0)
 		src.drop_all_held_items()
 		src.stop_pulling()
-
+/*
 /mob/living/simple_animal/hostile/deathclaw/bullet_act(obj/item/projectile/Proj)
 	if(!Proj)
 		return
@@ -275,3 +277,4 @@
 
 	charging = FALSE
 	charging = FALSE
+*/

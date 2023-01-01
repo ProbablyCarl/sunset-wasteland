@@ -98,7 +98,7 @@
 	sharpness = SHARP_POINTY
 
 /obj/item/mining_scanner/prospector/Initialize()
-	..()
+	. = ..()
 	var/mutable_appearance/overlay
 	desc = "A handmade [name]."
 	overlay = mutable_appearance(icon, "handle_prospect")
@@ -129,7 +129,7 @@
 	sharpness = SHARP_POINTY
 
 /obj/item/pickaxe/smithed/Initialize()
-	..()
+	. = ..()
 	desc = "A handmade [name]."
 	var/mutable_appearance/overlay
 	overlay = mutable_appearance(icon, "woodrod")
@@ -153,7 +153,7 @@
 	sharpness = SHARP_EDGED //it cuts through the earth
 
 /obj/item/shovel/smithed/Initialize()
-	..()
+	. = ..()
 	desc = "A handmade [name]."
 	var/mutable_appearance/overlay
 	overlay = mutable_appearance(icon, "shovelhandle")
@@ -172,7 +172,7 @@
 	material_flags = MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 
 /obj/item/crowbar/smithed/Initialize()
-	..()
+	. = ..()
 	desc = "A handmade [name]."
 	var/mutable_appearance/overlay
 	overlay = mutable_appearance(icon, "handle_crowbar")
@@ -192,7 +192,7 @@
 	force = 28
 
 /obj/item/crowbar/smithedunitool/Initialize()
-	..()
+	. = ..()
 	desc = "A bizarre combination of a crowbar and some sort of knifeblade."
 	var/mutable_appearance/overlay
 	overlay = mutable_appearance(icon, "handle_unitool")
@@ -216,7 +216,7 @@
 	force = 25
 	sharpness = SHARP_EDGED
 	item_flags = NEEDS_PERMIT | ITEM_CAN_PARRY
-	block_parry_data = /datum/block_parry_data/captain_saber
+	block_parry_data = /datum/block_parry_data/smith_generic
 	w_class = WEIGHT_CLASS_BULKY
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/belt.dmi'
 	layer = MOB_UPPER_LAYER
@@ -240,30 +240,44 @@
 	force = 24
 	block_chance = 25
 
+/datum/block_parry_data/smith_generic
+	parry_stamina_cost = 12
+	parry_time_active = 6
+	parry_time_perfect = 3
+	parry_time_perfect_leeway = 2
+	parry_failed_stagger_duration = 6 SECONDS
+	parry_failed_clickcd_duration = 5 SECONDS
+	parry_time_windup = 0
+	parry_time_spindown = 0
+	parry_imperfect_falloff_percent = 10
+	parry_efficiency_to_counterattack = 100
+	parry_efficiency_considered_successful = 100
+	parry_efficiency_perfect = 120
+	parry_data = list(PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN = 1.5)
 
 /datum/block_parry_data/smithsaber
 	parry_stamina_cost = 15
 	parry_time_active = 8
-	parry_time_perfect = 2
+	parry_time_perfect = 4
 	parry_time_perfect_leeway = 2
-	parry_failed_stagger_duration = 3 SECONDS
-	parry_failed_clickcd_duration = 3 SECONDS
+	parry_failed_stagger_duration = 6 SECONDS
+	parry_failed_clickcd_duration = 5 SECONDS
 	parry_time_windup = 0
 	parry_time_spindown = 0
 	parry_imperfect_falloff_percent = 0
 	parry_efficiency_to_counterattack = 100
 	parry_efficiency_considered_successful = 100
 	parry_efficiency_perfect = 120
-	parry_data = list(PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN = 4)
+	parry_data = list(PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN = 1.5)
 
 // go for the eyes Boo
 /obj/item/melee/smith/dagger
 	name = "dagger"
 	icon_state = "dagger_smith"
 	overlay_state = "hilt_dagger"
-	w_class = WEIGHT_CLASS_SMALL
+	w_class = WEIGHT_CLASS_TINY
 	sharpness = SHARP_EDGED
-	force = 24
+	force = 19
 	hitsound = 'sound/weapons/rapierhit.ogg'
 
 /obj/item/melee/smith/dagger/attack(mob/living/carbon/M, mob/living/carbon/user)
@@ -279,6 +293,7 @@
 	name = "machete"
 	icon_state = "machete_smith"
 	overlay_state = "hilt_machete"
+	block_parry_data = /datum/block_parry_data/smith_generic
 	force = 24
 	sharpness = SHARP_EDGED
 	wound_bonus = 30
@@ -299,15 +314,15 @@
 	icon_state = "waki_smith"
 	overlay_state = "hilt_waki"
 	sharpness = SHARP_EDGED
-	force = 25
+	force = 21
 	item_flags = NEEDS_PERMIT | ITEM_CAN_PARRY
 	block_parry_data = /datum/block_parry_data/waki
 	hitsound = 'sound/weapons/rapierhit.ogg'
 	block_chance = 5
-	wound_bonus = 15
+	wound_bonus = 25
 	bare_wound_bonus = 30
 
-/datum/block_parry_data/waki //like longbokken but worse reflect
+/datum/block_parry_data/waki
 	parry_stamina_cost = 6
 	parry_time_windup = 0
 	parry_time_active = 15 //decent window
@@ -319,20 +334,21 @@
 	parry_efficiency_considered_successful = 80
 	parry_efficiency_perfect = 120
 	parry_failed_stagger_duration = 3 SECONDS
-	parry_data = list(PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN = 1.9)
+	parry_data = list(PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN = 1.5)
 
 // Mace - low damage, high AP (25, 0,4)
 /obj/item/melee/smith/mace
 	name = "mace"
 	icon_state = "mace_smith"
 	overlay_state = "handle_mace"
-	force = 15
+	force = 17
+	block_parry_data = /datum/block_parry_data/smith_generic
 
 /obj/item/melee/smith/mace/attack(mob/living/M, mob/living/user)
 	. = ..()
 	if(!istype(M))
 		return
-	M.apply_damage(15, STAMINA, "chest", M.run_armor_check("chest", "melee"))
+	M.apply_damage(20, STAMINA, "chest", M.run_armor_check("chest", "melee"))
 
 
 //////////////////////////
@@ -347,7 +363,7 @@
 	icon_prefix = "katana_smith"
 	overlay_state = "hilt_katana"
 	force = 22
-	wielded_mult = 1.5
+	wielded_mult = 1.4
 	item_flags = ITEM_CAN_PARRY | NEEDS_PERMIT
 	block_parry_data = /datum/block_parry_data/smithkatana
 	hitsound = 'sound/weapons/rapierhit.ogg'
@@ -355,23 +371,23 @@
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/belt.dmi'
 	layer = MOB_UPPER_LAYER
 	block_chance = 30
-	wound_bonus = 25
+	wound_bonus = 35
 	bare_wound_bonus = 40
 
 /datum/block_parry_data/smithkatana
-	parry_stamina_cost = 12 //dont miss
+	parry_stamina_cost = 24 //dont miss
 	parry_time_active = 6
 	parry_time_perfect = 3
 	parry_time_perfect_leeway = 3
-	parry_failed_stagger_duration = 3 SECONDS
-	parry_failed_clickcd_duration = 3 SECONDS
+	parry_failed_stagger_duration = 6 SECONDS
+	parry_failed_clickcd_duration = 5 SECONDS
 	parry_time_windup = 0
 	parry_time_spindown = 0
 	parry_imperfect_falloff_percent = 0
 	parry_efficiency_to_counterattack = 100
 	parry_efficiency_considered_successful = 120
 	parry_efficiency_perfect = 120
-	parry_data = list(PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN = 4)
+	parry_data = list(PARRY_COUNTERATTACK_MELEE_ATTACK_CHAIN = 1.5)
 
 // Heavy axe, 2H focused chopper 27/54. Can be worn on your back.
 /obj/item/melee/smith/twohand/axe
@@ -446,6 +462,7 @@
 	max_reach = 2
 	force = 10
 	sharpness = SHARP_POINTY
+	block_parry_data = /datum/block_parry_data/smith_generic
 
 /obj/item/melee/smith/twohand/spear/lance
 	name = "legion lance"
@@ -468,9 +485,9 @@
 	overlay_state = "shaft_javelin"
 	item_state = "javelin_smith"
 	sharpness = SHARP_POINTY
-	embedding = list("pain_mult" = 2, "embed_chance" = 60, "fall_chance" = 20, "ignore_throwspeed_threshold" = TRUE)
+	embedding = list("pain_mult" = 2, "embed_chance" = 75, "fall_chance" = 16, "ignore_throwspeed_threshold" = TRUE)
 	force = 15
-	armour_penetration = 0.10
+	armour_penetration = 0.15
 
 // Smaller weaker javelin, easier to store/carry, less effective
 /obj/item/melee/smith/throwingknife
@@ -478,8 +495,9 @@
 	icon_state = "throwing_smith"
 	overlay_state = "handle_throwing"
 	item_state = "dagger_smith"
-	embedding = list("pain_mult" = 2, "embed_chance" = 50, "fall_chance" = 20, "ignore_throwspeed_threshold" = TRUE)
-	force = 14
+	embedding = list("pain_mult" = 3, "embed_chance" = 80, "fall_chance" = 30, "ignore_throwspeed_threshold" = TRUE)
+	force = 13
+	armour_penetration = 0.05
 	w_class = WEIGHT_CLASS_SMALL
 
 

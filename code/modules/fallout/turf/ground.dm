@@ -420,7 +420,7 @@
 	clawfootstep = FOOTSTEP_SNOW
 
 /turf/open/indestructible/ground/outside/snow/Initialize()
-	..()
+	. = ..()
 	if(!((locate(/obj/structure) in src) || (locate(/obj/machinery) in src)))
 		plantGrass()
 	icon_state = "snow[rand(0,12)]"
@@ -432,8 +432,9 @@
 	desc = "Looks cold."
 	icon_state = "snowplating"
 	footstep = FOOTSTEP_PLATING
-	barefootstep = FOOTSTEP_PLATING
-	clawfootstep = FOOTSTEP_PLATING
+	barefootstep = FOOTSTEP_HARD_BAREFOOT
+	clawfootstep = FOOTSTEP_HARD_CLAW
+	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 
 /turf/open/indestructible/ground/outside/snow/proc/setTurfPlant(newTurfPlant)
 	turfPlant = newTurfPlant

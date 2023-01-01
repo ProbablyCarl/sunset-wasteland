@@ -18,7 +18,7 @@
 
 /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/t45b/raider
 	name = "raider T-45b power helmet"
-	desc = "a raider's attempt to duplicate a power armor helmet. The result is a fuzed mass of metal and ceramic that nonetheless provides protection"
+	desc = "A heavily modified, almost bastardised T-45b power armor helmet."
 	icon_state = "raiderpa_helm"
 	item_state = "raiderpa_helm"
 	armor = list("melee" = 60, "bullet" = 60, "laser" = 50, "energy" = 15, "bomb" = 40, "bio" = 55, "rad" = 25, "fire" = 55, "acid" = 15, "wound" = 25)
@@ -102,10 +102,10 @@
 
 // X-02
 /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/x02
-	name = "salvaged Enclave helmet"
+	name = "\improper salvaged APA Mk II helmet"
 	desc = "It's a salvaged X-02 power armor helmet."
 	icon_state = "advanced"
 	item_state = "advanced"
-	armor = list("melee" = 80, "bullet" = 80, "laser" = 70, "energy" = 35, "bomb" = 60, "bio" = 70, "rad" = 65, "fire" = 85, "acid" = 45, "wound" = 50)
+	armor = list("melee" = 75, "bullet" = 75, "laser" = 85, "energy" = 85, "bomb" = 70, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 50)
 	slowdown = 0.1
 	flags_inv = HIDEFACIALHAIR|HIDEFACE|HIDEEYES|HIDEEARS|HIDEHAIR|HIDESNOUT

@@ -764,6 +764,10 @@
 
 /obj/item/card/id/departmental_budget/Destroy()
 	SSeconomy.dep_cards -= src
+	registered_account = null
+	var/datum/bank_account/B = SSeconomy.get_dep_account(department_ID)
+	if(B?.bank_cards.len)
+		B.bank_cards -= src
 	return ..()
 
 /obj/item/card/id/departmental_budget/update_label()
@@ -1207,6 +1211,19 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
 
+/obj/item/card/id/khan_courttattoo
+	name = "Great Khan Courtesan tramp stamp"
+	desc = "A tattoo of the symbol of the Great Khans, placed just above the individual's rear."
+	icon = 'icons/fallout/clothing/khans.dmi'
+	icon_state = "khan_id"
+	item_state = null
+	assignment = "gang tattoo"
+	uses_overlays = FALSE
+	access = list(ACCESS_KHAN)
+
+/obj/item/card/id/khan_courttattoo/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
 
 /obj/item/card/id/outcasttattoo
 	name = "faded tribal tattoos"
@@ -1220,14 +1237,40 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
 
+/obj/item/card/id/raider_tags
+	name = "faded gang tattoos"
+	desc = "Tattoos marking the wearer as a raider, worn and faded colors."
+	icon_state = "skin"
+	item_state = "skin"
+	assignment = "gang tattoo"
+	uses_overlays = FALSE
+	access = list(ACCESS_RAIDER)
+
+/obj/item/card/id/raider_tags/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
+
+/obj/item/card/id/boss_raider_tags
+	name = "faded gang tattoos"
+	desc = "Tattoos marking the wearer as a raider, worn and faded colors."
+	icon_state = "skin"
+	item_state = "skin"
+	assignment = "gang tattoo"
+	uses_overlays = FALSE
+	access = list(ACCESS_RAIDER, ACCESS_RAIDER_BOSS)
+
+/obj/item/card/id/boss_raider_tags/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
+
 /* Tribal Tags
 */
 
 /obj/item/card/id/tribetattoo
 	name = "Tattoo of the machine spirits"
-	desc = "A tattoo depicting the five machine spirits in harmony."
-	icon_state = "talisman"
-	item_state = "talisman"
+	desc = "A tattoo depicting machine spirits in harmony."
+	icon_state = "skin"
+	item_state = "skin"
 	assignment = "tribe tattoo"
 	uses_overlays = FALSE
 

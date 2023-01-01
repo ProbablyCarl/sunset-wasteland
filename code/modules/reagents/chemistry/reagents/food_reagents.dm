@@ -393,8 +393,9 @@
 	water_level = 0.5
 
 /datum/reagent/consumable/brocjuice/on_mob_life(mob/living/carbon/M)
-	M.adjustOxyLoss(-1*REAGENTS_EFFECT_MULTIPLIER, 0)
+	M.adjustOxyLoss(-1*REAGENTS_EFFECT_MULTIPLIER, updating_health = FALSE)
 	..()
+	return TRUE // update health at end of tick
 
 /datum/reagent/consumable/xanderjuice
 	name = "Xander Root Juice"
@@ -418,7 +419,7 @@
 	water_level = 0.5
 
 /datum/reagent/consumable/agavejuice/on_mob_life(mob/living/carbon/M)
-	M.adjustFireLoss(-0.5*REAGENTS_EFFECT_MULTIPLIER, 0)
+	M.adjustFireLoss(-0.5*REAGENTS_EFFECT_MULTIPLIER, updating_health = FALSE)
 	..()
 
 /datum/reagent/consumable/ferajuice
@@ -431,7 +432,8 @@
 
 /datum/reagent/consumable/ferajuice/on_mob_life(mob/living/carbon/M)
 	if(M.health > 20)
-		M.adjustToxLoss(-1*REAGENTS_EFFECT_MULTIPLIER, 0)
+		M.adjustToxLoss(-1*REAGENTS_EFFECT_MULTIPLIER, updating_health = FALSE)
+		. = TRUE // update health at end of tick
 	..()
 
 /datum/reagent/consumable/daturajuice
@@ -473,8 +475,9 @@
 	water_level = 0.5
 
 /datum/reagent/consumable/cavefungusjuice/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(-0.5*REAGENTS_EFFECT_MULTIPLIER, 0)
+	M.adjustToxLoss(-0.5*REAGENTS_EFFECT_MULTIPLIER, updating_health = FALSE)
 	..()
+	return TRUE // update health at end of tick
 
 /datum/reagent/consumable/tato_juice
 	name = "Tato Juice"
@@ -749,11 +752,12 @@
 /datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M)
 	M.reagents.add_reagent(/datum/reagent/consumable/sugar,3)
 	if(prob(55))
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
-		M.adjustOxyLoss(-1*REM, 0)
-		M.adjustToxLoss(-1*REM, 0, TRUE) //heals TOXINLOVERs
+		M.adjustBruteLoss(-1*REM, updating_health = FALSE)
+		M.adjustFireLoss(-1*REM, updating_health = FALSE)
+		M.adjustOxyLoss(-1*REM, updating_health = FALSE)
+		M.adjustToxLoss(-1*REM, updating_health = FALSE, forced = TRUE) //heals TOXINLOVERs
 	..()
+	return TRUE // update health at end of tick
 
 /datum/reagent/consumable/honey/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
 	if(iscarbon(M) && (method in list(TOUCH, VAPOR, PATCH)))
@@ -874,8 +878,8 @@
 
 /datum/reagent/consumable/vitfro/on_mob_life(mob/living/carbon/M)
 	if(prob(80))
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
+		M.adjustBruteLoss(-1*REM, updating_health = FALSE)
+		M.adjustFireLoss(-1*REM, updating_health = FALSE)
 		. = TRUE
 	..()
 
@@ -966,7 +970,7 @@
 
 /datum/reagent/consumable/bbqsauce
 	name = "BBQ Sauce"
-	description = "Sweet, Smokey, Savory, and gets everywhere. Perfect for Grilling."
+	description = "Sweet, smokey, savory, and gets everywhere. Perfect for grilling."
 	nutriment_factor = 5 * REAGENTS_METABOLISM
 	color = "#78280A" // rgb: 120 40, 10
 	taste_mult = 2.5 //sugar's 1.5, capsacin's 1.5, so a good middle ground.
@@ -981,3 +985,40 @@
 	taste_mult = 2
 	taste_description = "fizzy sweetness"
 	value = REAGENT_VALUE_COMMON
+
+/datum/reagent/consumable/buffalojuice
+	name = "Buffalo Juice"
+	description = "Juice from the buffalo gourd, a common herbal remedy for injuries with surprisingly potent healing properties."
+	nutriment_factor = 1 * REAGENTS_METABOLISM
+	color = "#14FF3C" // rgb: 48, 32, 0
+	taste_description = "tingling electricity"
+	metabolization_rate = 0.25 * REAGENTS_METABOLISM
+	glass_icon_state = "Cactus Water"
+	overdose_threshold = 30
+	water_level = 1.5
+
+/datum/reagent/consumable/buffalojuice/on_mob_life(mob/living/carbon/M)
+	if(M.health < 0)
+		M.adjustToxLoss(-0.5*REM, updating_health = FALSE)
+		M.adjustBruteLoss(-0.5*REM, updating_health = FALSE)
+		M.adjustFireLoss(-0.5*REM, updating_health = FALSE)
+	if(M.oxyloss > 35)
+		M.setOxyLoss(35, 0)
+	if(M.losebreath >= 4)
+		M.losebreath -= 2
+	if(M.losebreath < 0)
+		M.losebreath = 0
+	M.adjustStaminaLoss(-0.5*REM, updating_health = FALSE)
+	if(prob(20))
+		M.AdjustAllImmobility(-20, 0)
+		M.AdjustUnconscious(-20, 0)
+	..()
+	return TRUE // update health at end of tick
+
+/datum/reagent/consumable/buffalojuice/overdose_process(mob/living/M)
+	if(prob(33))
+		M.adjustStaminaLoss(2.5*REM, updating_health = FALSE)
+		M.adjustToxLoss(1*REM, updating_health = FALSE)
+		M.losebreath++
+		. = 1
+	..()

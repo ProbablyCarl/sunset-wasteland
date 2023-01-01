@@ -103,6 +103,14 @@ also be like that but I can't be arsed to go back and change them all*/
 #define ACCESS_CLINIC		133 //Oasis clinic access
 #define ACCESS_ENCLAVE 		134 //enclave minibunker
 #define ACCESS_LEGION_SLAVE	135	//general legion access
+#define ACCESS_TOWN			136 //general town access
+#define ACCESS_TOWN_BAR		137 //town Bar access
+#define ACCESS_FUSION		138 //town reactor access
+#define ACCESS_SHOPKEEP		139 //town Shopkeeper access
+
+#define ACCESS_RAIDER		141 //raider door access
+#define ACCESS_RAIDER_BOSS		142 //raider boss door access
+
 	//The Syndicate
 #define ACCESS_SYNDICATE 150//General Syndicate Access. Includes Syndicate mechs and ruins.
 #define ACCESS_SYNDICATE_LEADER 151//Nuke Op Leader Access

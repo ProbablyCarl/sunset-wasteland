@@ -160,7 +160,7 @@
 
 /obj/item/ammo_casing/shotgun/incapacitate
 	name = "custom incapacitating shot"
-	desc = "A shotgun casing filled with... something. used to incapacitate targets."
+	desc = "A shotgun casing filled with... something. Used to incapacitate targets."
 	icon_state = "bountyshell"
 	projectile_type = /obj/item/projectile/bullet/pellet/shotgun_incapacitate
 	pellets = 12//double the pellets, but half the stun power of each, which makes this best for just dumping right in someone's face.
@@ -182,6 +182,14 @@
 	projectile_type = /obj/item/projectile/bullet/pellet/trainshot
 	pellets = 3
 	variance = 15
+
+/obj/item/ammo_casing/shotgun/flechette
+	name = "12 gauge flechette shell"
+	desc = "It's a 12-gauge flechette shell."
+	icon_state = "magshell"
+	projectile_type = /obj/item/projectile/bullet/pellet/flechette
+	pellets = 24
+	variance = 24
 
 
 // BETA STUFF // Obsolete

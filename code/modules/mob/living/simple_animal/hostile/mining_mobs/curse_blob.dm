@@ -56,9 +56,9 @@
 	doing_move_loop = FALSE
 
 /mob/living/simple_animal/hostile/asteroid/curseblob/proc/check_for_target()
-	if(QDELETED(set_target) || set_target.stat != CONSCIOUS || z != set_target.z)
+	if(set_target && (set_target.stat != CONSCIOUS || z != set_target.z))
 		qdel(src)
-		return TRUE
+	return QDELETED(set_target)
 
 /mob/living/simple_animal/hostile/asteroid/curseblob/GiveTarget(new_target)
 	if(check_for_target())
@@ -103,7 +103,7 @@ IGNORE_PROC_IF_NOT_TARGET(attack_slime)
 		return BULLET_ACT_FORCE_PIERCE
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/attacked_by(obj/item/I, mob/living/L, attackchain_flags = NONE, damage_multiplier = 1)
+/mob/living/simple_animal/hostile/asteroid/curseblob/attacked_by(obj/item/I, mob/living/L, attackchain_flags = NONE, damage_multiplier = 1, damage_bonus = 0)
 	if(L != set_target)
 		I.ApplyAttackCooldown(L, src)
 		return

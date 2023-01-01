@@ -437,6 +437,7 @@
 	loot = list(
 				/obj/effect/spawner/bundle/f13/armor/t45d,
 				/obj/effect/spawner/bundle/f13/armor/t51b,
+				/obj/effect/spawner/bundle/f13/armor/t45b_salvaged = 2,
 				)
 
 /obj/effect/spawner/bundle/f13/armor/t45d
@@ -596,22 +597,23 @@
 	name = "good dungeon science loot"	//to replace guns as treasure in heavily guarded areas
 	lootcount = 1
 
-	loot = list(
-		/obj/item/reagent_containers/glass/beaker/meta = 5,
-		/obj/item/stack/sheet/mineral/abductor/ten = 5,
+	loot = list( //Now out of 100
+		/obj/item/reagent_containers/glass/beaker/meta = 2,
+		/obj/item/stack/sheet/mineral/abductor/ten = 2,
 		/obj/item/scalpel/advanced = 5,
 		/obj/item/surgical_drapes/advanced = 5,
 		/obj/effect/spawner/bundle/f13/needler = 5,
 		/obj/item/clothing/glasses/night = 5,
 		/obj/item/circuitboard/machine/chem_dispenser/apothecary = 5,
-		/obj/item/storage/box/stockparts/deluxe = 5,
+		/obj/item/storage/box/stockparts/deluxe = 2,
 		/obj/item/storage/box/emps = 5,
-		/obj/item/organ/cyberimp/arm/janitor = 5,
+		/obj/item/organ/cyberimp/arm/janitor = 4,
 		/obj/item/reagent_containers/glass/bottle/fentanyl = 5,
 		/obj/item/reagent_containers/glass/bottle/frostoil = 5,
 		/obj/item/book/granter/trait/midsurgery = 5,
-		/obj/item/reagent_containers/glass/bottle/FEV_solution = 2,
-		/obj/item/reagent_containers/glass/bottle/FEV_solution/two = 2,
+		/obj/item/reagent_containers/glass/bottle/FEV_solution = 20,
+		/obj/item/reagent_containers/glass/bottle/FEV_solution/two = 5,
+		/obj/item/reagent_containers/glass/bottle/FEV_solution/curling = 20,
 		)
 
 /obj/effect/spawner/lootdrop/f13/medical/random_fev
@@ -888,7 +890,6 @@
 				/obj/effect/spawner/bundle/f13/r84 = 10,
 				/obj/effect/spawner/bundle/f13/dkssniper = 15,
 				/obj/effect/spawner/bundle/f13/pistol14 = 15,
-				/obj/item/gun/ballistic/revolver/grenadelauncher = 5,
 				/obj/effect/spawner/bundle/f13/riotshotgun = 10,
 				)
 
@@ -1243,9 +1244,8 @@
 /obj/effect/spawner/bundle/f13/neostead
 	name = "Neostead 2000 shotgun and ammo spawner"
 	items = list(
-				/obj/item/gun/ballistic/shotgun/automatic/combat/neostead,
-				/obj/item/ammo_box/shotgun/slug,
-				/obj/item/ammo_box/shotgun/buck
+				/obj/item/gun/ballistic/shotgun/automatic/combat/neostead_noalt,
+				/obj/item/ammo_box/shotgun/flechette
 	)
 
 /obj/effect/spawner/bundle/f13/auto5
@@ -1670,12 +1670,14 @@
 				/obj/item/grenade/f13/frag,
 				/obj/effect/spawner/bundle/f13/grenadelauncher,
 				)
+
 /obj/effect/spawner/lootdrop/f13/bomb/top_tier
 	lootcount = 1
 	loot = list(
 				/obj/item/grenade/f13/plasma,
 				/obj/item/grenade/f13/incendiary,
 				/obj/item/grenade/f13/radiation,
+				/obj/item/grenade/f13/he_grenade,
 				/obj/item/grenade/plastic/x4,
 				/obj/item/grenade/stingbang/shred = 1,
 				/obj/effect/spawner/bundle/f13/rocketlauncher,
@@ -2184,11 +2186,11 @@
 	icon_state = "blueprint_loot"
 	lootcount = 1
 	loot = list(
-		/obj/item/book/granter/crafting_recipe/blueprint/gauss,
-		/obj/item/book/granter/crafting_recipe/blueprint/am_rifle,
+// 		/obj/item/book/granter/crafting_recipe/blueprint/gauss,
+//		/obj/item/book/granter/crafting_recipe/blueprint/am_rifle,
 		/obj/item/book/granter/crafting_recipe/blueprint/citykiller,
 		/obj/item/book/granter/crafting_recipe/blueprint/rangemaster,
-		/obj/item/book/granter/crafting_recipe/blueprint/bozar
+//		/obj/item/book/granter/crafting_recipe/blueprint/bozar
 	)
 
 /obj/effect/spawner/lootdrop/f13/blueprintVHighPartsWeighted
@@ -2296,3 +2298,10 @@
 		/obj/effect/spawner/lootdrop/f13/armor/tier5 = 2,
 		)
 
+/obj/effect/spawner/lootdrop/f13/weapon/gun/energy/buyable
+	name = "mid tier energy gun"
+	loot = list(/obj/effect/spawner/bundle/f13/aer9 = 63,
+				/obj/effect/spawner/bundle/f13/aer12 = 20,
+				/obj/effect/spawner/bundle/f13/wattz2k = 10,
+				/obj/effect/spawner/bundle/f13/ionrifle = 2
+				)

@@ -392,7 +392,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 
 /datum/species/proc/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	if(C.dna.species.exotic_bloodtype)
-		if(!new_species.exotic_bloodtype)
+		if(!istype(new_species) || !new_species.exotic_bloodtype)
 			C.dna.blood_type = random_blood_type()
 		else
 			C.dna.blood_type = new_species.exotic_bloodtype
@@ -409,16 +409,17 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 		C.type_of_meat = initial(meat)
 
 	//If their inert mutation is not the same, swap it out
-	if((inert_mutation != new_species.inert_mutation) && LAZYLEN(C.dna.mutation_index) && (inert_mutation in C.dna.mutation_index))
+	if((!istype(new_species) || inert_mutation != new_species.inert_mutation) && LAZYLEN(C.dna.mutation_index) && (inert_mutation in C.dna.mutation_index))
 		C.dna.remove_mutation(inert_mutation)
-		//keep it at the right spot, so we can't have people taking shortcuts
-		var/location = C.dna.mutation_index.Find(inert_mutation)
-		C.dna.mutation_index[location] = new_species.inert_mutation
-		C.dna.default_mutation_genes[location] = C.dna.mutation_index[location]
-		C.dna.mutation_index[new_species.inert_mutation] = create_sequence(new_species.inert_mutation)
-		C.dna.default_mutation_genes[new_species.inert_mutation] = C.dna.mutation_index[new_species.inert_mutation]
+		if(istype(new_species))
+			//keep it at the right spot, so we can't have people taking shortcuts
+			var/location = C.dna.mutation_index.Find(inert_mutation)
+			C.dna.mutation_index[location] = new_species.inert_mutation
+			C.dna.default_mutation_genes[location] = C.dna.mutation_index[location]
+			C.dna.mutation_index[new_species.inert_mutation] = create_sequence(new_species.inert_mutation)
+			C.dna.default_mutation_genes[new_species.inert_mutation] = C.dna.mutation_index[new_species.inert_mutation]
 
-	if(!new_species.has_field_of_vision && has_field_of_vision && ishuman(C) && CONFIG_GET(flag/use_field_of_vision))
+	if((!istype(new_species) || !new_species.has_field_of_vision) && has_field_of_vision && ishuman(C) && CONFIG_GET(flag/use_field_of_vision))
 		var/datum/component/field_of_vision/F = C.GetComponent(/datum/component/field_of_vision)
 		if(F)
 			qdel(F)
@@ -1304,25 +1305,25 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 	//THIRST//
 	if(H.water > THIRST_LEVEL_LIGHT)
 		if(H.transpiration_efficiency != 1.1)
-			H << "<span class='notice'>You are no longer thirsty.</span>"
+			to_chat(H, span_notice("You are no longer thirsty."))
 		H.transpiration_efficiency = 1.1
 	else if(H.water > THIRST_LEVEL_MIDDLE) //LITLE THIRST
 		if(H.transpiration_efficiency != 1)
-			to_chat(H, "<span class='notice'>Your mouth is incredibly dry.</span>")
+			to_chat(H, span_notice("Your mouth is incredibly dry."))
 		H.transpiration_efficiency = 1
 	else if(H.water > THIRST_LEVEL_HARD) //MIDDLE THIRST
 		if(H.transpiration_efficiency != 0.9)
-			to_chat(H, "<span class='warning'>You are very thirsty, find water.</span>")
+			to_chat(H, span_warning("You are very thirsty, find water."))
 		H.transpiration_efficiency = 0.9
 	else if(H.water > THIRST_LEVEL_DEADLY) //HARD THIRST
 		if(H.transpiration_efficiency != 0.6)
-			to_chat(H, "<span class='warning'>You are very dehydrated, find water immediately or you will perish.</span>")
+			to_chat(H, span_danger("You are very dehydrated, find water immediately or you will perish."))
 		H.transpiration_efficiency = 0.6
 		if(prob(10))//Minor annoyance, depending on luck.
 			H.adjustStaminaLoss(25)
 	else
 		if(H.transpiration_efficiency != 0.1)
-			to_chat(H, "<span class='warning'>You are extremely dehydrated, death is upon you. You must find water.</span>")
+			to_chat(H, span_userdanger("You are extremely dehydrated, death is upon you. You must find water."))
 		H.adjustOxyLoss(15)//No longer minor.
 		H.transpiration_efficiency = 0.1
 		if(prob(10))
@@ -1335,7 +1336,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 		if(H.metabolism_efficiency != 1.25 && !HAS_TRAIT(H, TRAIT_NOHUNGER))
 			to_chat(H, "<span class='notice'>You feel vigorous.</span>")
 			H.metabolism_efficiency = 1.25
-	else if(H.nutrition < NUTRITION_LEVEL_STARVING + 50) //Starving.
+	else if(H.nutrition < NUTRITION_LEVEL_STARVING + 50 && H.nutrition > 49 ) //Starving.
 		if(H.metabolism_efficiency != 0.8)
 			to_chat(H, "<span class='notice'>You feel sluggish.</span>")
 		H.metabolism_efficiency = 0.8
@@ -1344,6 +1345,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 		else
 			if(prob(15)) //Eat something, nerd.
 				H.adjustStaminaLoss(25)
+	else if(H.nutrition < 49)
+		if(H.getStaminaLoss() > 100) //The time for not screwing stamina has ended
+			return
+		else
+			H.adjustStaminaLoss(10)
 	else
 		if(H.metabolism_efficiency == 1.25)
 			to_chat(H, "<span class='notice'>You no longer feel vigorous.</span>")
@@ -1476,6 +1482,32 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 		target.grabbedby(user)
 		return 1
 
+/datum/species/proc/get_minimum_punch_damage(mob/living/carbon/human/user)
+	var/damage = punchdamagelow
+	if(HAS_TRAIT(user, TRAIT_IRONFIST))
+		damage += 6
+	if(HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER)) // unit test no-miss trait
+		damage = get_maximum_punch_damage(user)
+	return damage
+
+/datum/species/proc/get_maximum_punch_damage(mob/living/carbon/human/user)
+	var/damage = punchdamagehigh
+	if(HAS_TRAIT(user, TRAIT_IRONFIST))
+		damage += 5
+	return damage
+
+/datum/species/proc/punch_damage_roll(mob/living/carbon/human/user, mob/target)
+	var/damage = rand(get_minimum_punch_damage(user), get_maximum_punch_damage(user))
+	//CITADEL CHANGES - makes resting and disabled combat mode reduce punch damage, makes being out of combat mode result in you taking more damage
+	if(!CHECK_MOBILITY(user, MOBILITY_STAND))
+		damage *= 0.65
+	if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+		damage *= 0.8
+	if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+		damage *= 1.25 // so that if neither are in combat mode it evens out
+	//END OF CITADEL CHANGES
+	return damage
+
 /datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, attackchain_flags = NONE)
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
@@ -1512,20 +1544,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 			else
 				user.do_attack_animation(target, ATTACK_EFFECT_PUNCH)
 
-		var/damage = rand(user.dna.species.punchdamagelow, user.dna.species.punchdamagehigh)
-		if(HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER)) // unit test no-miss trait
-			damage = user.dna.species.punchdamagehigh
+		var/damage = punch_damage_roll(user, target)
 		var/punchedstam = target.getStaminaLoss()
 		var/punchedbrute = target.getBruteLoss()
-
-		//CITADEL CHANGES - makes resting and disabled combat mode reduce punch damage, makes being out of combat mode result in you taking more damage
-		if(!SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
-			damage *= 1.2
-		if(!CHECK_MOBILITY(user, MOBILITY_STAND))
-			damage *= 0.65
-		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
-			damage *= 0.8
-		//END OF CITADEL CHANGES
 
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected))
 
@@ -1747,8 +1768,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 		if("disarm")
 			disarm(M, H, attacker_style)
 
-/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, attackchain_flags = NONE, damage_multiplier = 1)
-	var/totitemdamage = H.pre_attacked_by(I, user) * damage_multiplier
+/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, attackchain_flags = NONE, damage_multiplier = 1, damage_bonus = 0)
+	var/totitemdamage = H.pre_attacked_by(I, user) * damage_multiplier + damage_bonus
 
 	if(!affecting) //Something went wrong. Maybe the limb is missing?
 		affecting = H.get_bodypart(BODY_ZONE_CHEST) //If the limb is missing, or something went terribly wrong, just hit the chest instead
@@ -1816,7 +1837,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 						H.adjustOrganLoss(ORGAN_SLOT_BRAIN, I.force * 0.2)
 
 					if(H.stat == CONSCIOUS && H != user && prob(I.force + ((100 - H.health) * 0.5))) // rev deconversion through blunt trauma.
-						var/datum/antagonist/rev/rev = H.mind.has_antag_datum(/datum/antagonist/rev)
+						var/datum/antagonist/rev/rev = H.mind?.has_antag_datum(/datum/antagonist/rev)
 						if(rev)
 							rev.remove_revolutionary(FALSE, user)
 

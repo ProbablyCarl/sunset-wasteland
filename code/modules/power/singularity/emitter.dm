@@ -109,7 +109,9 @@
 		message_admins("Emitter deleted at [ADMIN_VERBOSEJMP(T)]")
 		log_game("Emitter deleted at [AREACOORD(T)]")
 		investigate_log("<font color='red'>deleted</font> at [AREACOORD(T)]", INVESTIGATE_SINGULO)
+	QDEL_NULL(gun)
 	QDEL_NULL(sparks)
+	QDEL_NULL(wires)
 	return ..()
 
 /obj/machinery/power/emitter/update_icon_state()
@@ -328,7 +330,10 @@
 /obj/machinery/power/emitter/proc/remove_gun(mob/user)
 	if(!gun)
 		return
-	user.put_in_hands(gun)
+	if(user)
+		user.put_in_hands(gun)
+	else
+		gun.forceMove(drop_location())
 	gun = null
 	playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
 	gun_properties = list()

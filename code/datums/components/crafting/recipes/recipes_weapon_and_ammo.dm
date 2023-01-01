@@ -195,7 +195,7 @@
 	time = 5
 	category = CAT_WEAPONRY
 	subcategory = CAT_AMMO
-
+/*
 /datum/crafting_recipe/shotgunammo3p
 	name = "12g 3p trainshot box"
 	result = /obj/item/ammo_box/shotgun/trainshot
@@ -208,7 +208,61 @@
 	time = 5
 	category = CAT_WEAPONRY
 	subcategory = CAT_AMMO
+	always_available = FALSE
+*/
+/datum/crafting_recipe/shotgunammoflechette
+	name = "12g flechette box"
+	result = /obj/item/ammo_box/shotgun/flechette
+	reqs = list(/obj/item/stack/crafting/metalparts = 1,
+	/obj/item/stack/sheet/prewar = 50,//Yes, really.
+	/obj/item/stack/sheet/metal = 1,
+	/obj/item/stack/ore/blackpowder = 1
+	)
+	tools = list(TOOL_AWORKBENCH)
+	time = 5
+	category = CAT_WEAPONRY
+	subcategory = CAT_AMMO
+	always_available = FALSE
 
+/datum/crafting_recipe/shotgunammomagnum
+	name = "12g magnum shot box"
+	result = /obj/item/ammo_box/shotgun/magnum
+	reqs = list(/obj/item/stack/crafting/metalparts = 2,
+	/obj/item/stack/sheet/prewar = 30,
+	/obj/item/stack/sheet/metal = 2,
+	/obj/item/stack/ore/blackpowder = 2
+	)
+	tools = list(TOOL_AWORKBENCH)
+	time = 5
+	category = CAT_WEAPONRY
+	subcategory = CAT_AMMO
+	always_available = FALSE
+
+/datum/crafting_recipe/shotgunammoflechette_clip
+	name = "12g flechette clip"
+	result = /obj/item/ammo_box/clip/shotgun/loaded/flechette
+	reqs = list(/obj/item/stack/crafting/metalparts = 1,
+	/obj/item/stack/sheet/prewar = 25,//Not viable if you have the actual box recipe. Intended.
+	/obj/item/stack/sheet/metal = 1,
+	/obj/item/stack/ore/blackpowder = 1
+	)
+	tools = list(TOOL_AWORKBENCH)
+	time = 5
+	category = CAT_WEAPONRY
+	subcategory = CAT_AMMO
+
+/datum/crafting_recipe/shotgunammomagnum_clip
+	name = "12g magnum shot clip"
+	result = /obj/item/ammo_box/clip/shotgun/loaded/magnum
+	reqs = list(/obj/item/stack/crafting/metalparts = 2,
+	/obj/item/stack/sheet/prewar = 15,//As above.
+	/obj/item/stack/sheet/metal = 2,
+	/obj/item/stack/ore/blackpowder = 2
+	)
+	tools = list(TOOL_AWORKBENCH)
+	time = 5
+	category = CAT_WEAPONRY
+	subcategory = CAT_AMMO
 
 /datum/crafting_recipe/m22
 	name = ".22 Long Rifle ammo box"
@@ -554,6 +608,19 @@
 	subcategory = CAT_AMMO
 
 
+//Needle Ammo
+/datum/crafting_recipe/needle
+	name = "Needle Ammo"
+	result = /obj/item/ammo_box/needle
+	reqs = list(/obj/item/stack/crafting/metalparts = 1,
+				/obj/item/stack/sheet/prewar = 1,
+				/obj/item/stack/ore/blackpowder = 1,
+				)
+	tools = list(TOOL_AWORKBENCH)
+	time = 5
+	category = CAT_WEAPONRY
+	subcategory = CAT_AMMO
+	always_available = FALSE
 
 /////////////////
 ///GUN CRAFTING//
@@ -1010,7 +1077,7 @@
 
 /datum/crafting_recipe/neostead
 	name = "Neostead 2000"
-	result = /obj/item/gun/ballistic/shotgun/automatic/combat/neostead
+	result = /obj/item/gun/ballistic/shotgun/automatic/combat/neostead_noalt
 	reqs = list(/obj/item/stack/sheet/metal = 10,
 				/obj/item/advanced_crafting_components/assembly = 1,
 				/obj/item/advanced_crafting_components/alloys = 1,
@@ -1040,7 +1107,7 @@
 	always_available = FALSE
 
 
-//recharger pistol, followers of the apocalypse
+//recharger weapons, followers of the apocalypse
 /datum/crafting_recipe/rechargerpistol
 	name = "recharger pistol"
 	result = /obj/item/gun/energy/laser/wattz/recharger
@@ -1051,6 +1118,25 @@
 				/obj/item/stack/crafting/electronicparts = 2,
 				/obj/item/stack/sheet/mineral/gold = 5,
 				/obj/item/stack/sheet/mineral/uranium = 8,
+				)
+	tools = list(TOOL_WORKBENCH)
+	time = 120
+	category = CAT_WEAPONRY
+	subcategory = CAT_WEAPON
+	always_available = FALSE
+
+/datum/crafting_recipe/rechargerrifle //Intentionally expensive. Not giving this to guards round-start, they'll make it once materials have come in.
+	name = "recharger rifle"
+	result = /obj/item/gun/energy/laser/aer9/recharger
+	reqs = list(/obj/item/stack/sheet/metal = 5,
+				/obj/item/advanced_crafting_components/lenses = 1,
+				/obj/item/advanced_crafting_components/flux = 1,
+				/obj/item/advanced_crafting_components/assembly = 1,
+				/obj/item/stack/crafting/goodparts = 3,
+				/obj/item/stack/crafting/electronicparts = 4,
+				/obj/item/stack/sheet/mineral/gold = 8,
+				/obj/item/stack/sheet/mineral/uranium = 10,
+				/obj/item/stack/sheet/mineral/diamond = 2,
 				)
 	tools = list(TOOL_WORKBENCH)
 	time = 120

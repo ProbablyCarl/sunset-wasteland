@@ -1,14 +1,15 @@
 // 40mm (Grenade Launcher
 
-/obj/item/projectile/bullet/a40mm
+/obj/item/projectile/bullet/rocket/a40mm
 	name ="40mm grenade"
 	desc = "Oh no."
 	icon_state= "bolter"
-	damage = 5
-	armour_penetration = 0.01
+	damage = 35
+	armour_penetration = 0.25
 	pixels_per_second = TILES_TO_PIXELS(10) //slower than bullets
+	shrapnel_magnitude = 6
 
-/obj/item/projectile/bullet/a40mm/on_hit(atom/target, blocked = FALSE)
+/obj/item/projectile/bullet/rocket/on_hit(atom/target, blocked = FALSE)
 	..()
 	explosion(target, -1, -1, 3, 3, 0, flame_range = 3)
 	new /obj/effect/temp_visual/explosion(get_turf(target))
@@ -23,16 +24,16 @@
 	damage = 80//If you get hit with this directly? Ouch...
 	var/datum/effect_system/smoke_spread/bad/smoke
 
-/obj/item/projectile/bullet/a40mmg/New()
-	..()
+/obj/item/projectile/bullet/a40mmg/Initialize()
+	. = ..()
 	src.smoke = new /datum/effect_system/smoke_spread/teargas
 	src.smoke.attach(src)
+	smoke.set_up(4, src)
 
 /obj/item/projectile/bullet/a40mmg/Destroy()
-	qdel(smoke)
+	QDEL_NULL(smoke)
 	return ..()
 
 /obj/item/projectile/bullet/a40mmg/on_hit(atom/target, blocked = FALSE)
 	playsound(src.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
-	smoke.set_up(4, src)
 	smoke.start()

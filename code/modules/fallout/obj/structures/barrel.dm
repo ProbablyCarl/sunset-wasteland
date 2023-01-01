@@ -27,12 +27,15 @@
 
 /obj/structure/reagent_dispensers/barrel/dangerous/Destroy()
 	STOP_PROCESSING(SSradiation,src)
-	..()
+	return ..()
 
 //Bing bang boom done
 /obj/structure/reagent_dispensers/barrel/dangerous/process()
 	if(QDELETED(src))
 		return PROCESS_KILL
+
+	if(!z || !SSmobs.clients_by_zlevel[z].len) // we don't care about irradiating if no one is around to see it!
+		return
 
 	for(var/mob/living/carbon/human/victim in view(src,1))
 		if(istype(victim) && victim.stat != DEAD)
